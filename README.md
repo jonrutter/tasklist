@@ -5,9 +5,9 @@
 
 ![Netlify Status](https://api.netlify.com/api/v1/badges/bb5182ce-6fea-4db9-a730-93366ac059f2/deploy-status)
 [![Live Demo](https://img.shields.io/badge/demo-online-green.svg)](https://tasklist-rutterjt.netlify.app/)
-[![Current Version](https://img.shields.io/badge/version-2.0.0-green.svg)](https://github.com/rutterjt/tasklist)
-[![GitHub Stars](https://img.shields.io/github/stars/rutterjt/tasklist.svg)](https://github.com/rutterjt/tasklist/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/rutterjt/tasklist.svg)](https://github.com/rutterjt/tasklist/issues)
+[![Current Version](https://img.shields.io/badge/version-2.0.0-green.svg)](https://github.com/jonrutter/tasklist)
+[![GitHub Stars](https://img.shields.io/github/stars/jonrutter/tasklist.svg)](https://github.com/jonrutter/tasklist/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/jonrutter/tasklist.svg)](https://github.com/jonrutter/tasklist/issues)
 
 A lightweight, intuitive, open source to-do list app.
 
@@ -54,7 +54,7 @@ Preview a live demo: [https://tasklist-rutterjt.netlify.app/](https://tasklist-r
 
 **Jon Rutter**
 
-- [GitHub Profile](https://www.github.com/rutterjt)
+- [GitHub Profile](https://www.github.com/jonrutter)
 - [Email](mailto:contact@jonrutter.io)
 - [Website](https://www.jonrutter.io)
 
