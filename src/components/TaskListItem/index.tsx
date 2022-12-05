@@ -56,13 +56,13 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
 
   // creates 500ms lag between clicking checkbox and deleting item.
   useEffect(() => {
-    let deleteTimeout: any;
+    let deleteTimeout: number | undefined = undefined;
     if (checked) {
-      deleteTimeout = setTimeout(() => deleteTask(id), 500);
+      deleteTimeout = window.setTimeout(() => deleteTask(id), 500);
     } else {
       clearTimeout(deleteTimeout);
     }
-    return () => clearTimeout(deleteTimeout);
+    return () => window.clearTimeout(deleteTimeout);
   }, [checked, deleteTask, id]);
 
   // check handler

@@ -1,3 +1,4 @@
+import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, cleanup, waitFor } from '../../../utils/test-utils';
 import userEvent from '@testing-library/user-event';
@@ -129,7 +130,7 @@ describe('TaskForm', () => {
     render(Component);
 
     // the label button should initially show no label
-    let emptyLabelButton = screen.getByLabelText(/set label/i);
+    const emptyLabelButton = screen.getByLabelText(/set label/i);
     expect(emptyLabelButton).toHaveTextContent('');
 
     // clicking the label button should open the label popup
@@ -150,7 +151,7 @@ describe('TaskForm', () => {
 
     // the label button should now show the updated label
     expect(emptyLabelButton).not.toBeInTheDocument();
-    let filledLabelButton = screen.getByLabelText(/update label/i);
+    const filledLabelButton = screen.getByLabelText(/update label/i);
     expect(filledLabelButton).toHaveTextContent(/preloaded test label/i);
 
     // clearing the label should revert the previous changes
@@ -163,13 +164,13 @@ describe('TaskForm', () => {
       expect(screen.queryByTestId('label-popup')).not.toBeInTheDocument();
     });
     expect(filledLabelButton).not.toBeInTheDocument();
-    let newEmptyButton = screen.getByLabelText(/set label/i);
+    const newEmptyButton = screen.getByLabelText(/set label/i);
     expect(newEmptyButton).toHaveTextContent('');
   });
   it('supports adding and removing a priority level', async () => {
     render(Component);
     // priority should default to 4
-    let priorityButton = screen.getByLabelText(/set priority/i);
+    const priorityButton = screen.getByLabelText(/set priority/i);
     expect(priorityButton).toHaveAccessibleName(
       'Set Priority, priority is currently 4'
     );

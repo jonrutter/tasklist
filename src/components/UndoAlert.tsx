@@ -1,7 +1,8 @@
 import React from 'react';
 
 // mui
-import { Snackbar, Alert, Button, Slide, SlideProps } from '@mui/material';
+import { Snackbar, Alert, Button, Slide } from '@mui/material';
+import type { SlideProps } from '@mui/material';
 
 // store
 import { useStore } from '../store/useStore';

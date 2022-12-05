@@ -11,9 +11,9 @@ import type { StateType } from './reducer';
 
 // localstorage
 export const getItem = (name: keyof StateType) => {
-  let persistedState = localStorage.getItem(name);
+  const persistedState = localStorage.getItem(name);
   if (typeof persistedState === 'string') {
-    let parsedState = JSON.parse(persistedState);
+    const parsedState = JSON.parse(persistedState);
     if (!parsedState) return null;
     if ((name === 'list' || name === 'deleted') && Array.isArray(parsedState)) {
       return parsedState.map((item) => ({
@@ -51,7 +51,7 @@ export const createLabel = (label: LabelIncompleteType): LabelType => ({
  *
  * Does not mutate the original list.
  */
-export const sliceList = (list: any[], index: number, item?: any) =>
+export const sliceList = (list: unknown[], index: number, item?: unknown) =>
   item
     ? [...list.slice(0, index), item, ...list.slice(index + 1)]
     : [...list.slice(0, index), ...list.slice(index + 1)];

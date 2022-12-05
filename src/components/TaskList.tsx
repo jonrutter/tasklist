@@ -59,7 +59,7 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
       sortCallback = (a, b) => 0;
   }
 
-  let sortedList = [...list];
+  const sortedList = [...list];
 
   if (sortBy !== 'default') sortedList.sort(sortCallback);
 

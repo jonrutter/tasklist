@@ -11,16 +11,12 @@ import WarningDialog from './WarningDialog';
 // hooks
 import { usePopup } from '../hooks/usePopup';
 
-type Props = {
-  defaultItem?: any;
-};
-
 /**
  * Renders a button that, when pressed, causes a Task creation form to be rendered as a dropdown.
  *
  * Also renders a warning dialog when the user attempts to close the form without saving.
  */
-export const TaskCreateDropdown: React.FC<Props> = ({ defaultItem }) => {
+export const TaskCreateDropdown: React.FC = () => {
   const [formOpen, openForm, closeForm] = usePopup(false);
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
 

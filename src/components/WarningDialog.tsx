@@ -40,7 +40,7 @@ export const WarningDialog: React.FC<Props> = ({
       <Typography variant="body1">{body}</Typography>
     </DialogContent>
     <DialogActions>
-      <Button autoFocus variant="outlined" onClick={handleCancel}>
+      <Button variant="outlined" onClick={handleCancel}>
         {cancelLabel}
       </Button>
       <Button

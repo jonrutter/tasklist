@@ -57,7 +57,6 @@ export const LabelForm: React.FC<Props> = ({
           value={name || ''}
           onChange={(e) => setName(e.target.value)}
           required
-          autoFocus
           fullWidth
           sx={{ mb: 2 }}
         />

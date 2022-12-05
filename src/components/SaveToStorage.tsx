@@ -2,8 +2,12 @@ import { useEffect } from 'react';
 
 // store
 import { useStore } from '../store/useStore';
+import { TaskType, LabelType } from '../types';
 
-const setItem = (name: string, value: any) =>
+type StorageKey = 'list' | 'labels' | 'deleted';
+type StorageValue = TaskType[] | LabelType[];
+
+const setItem = (name: StorageKey, value: StorageValue) =>
   localStorage.setItem(name, JSON.stringify(value));
 
 /**

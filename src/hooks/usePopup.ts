@@ -13,7 +13,7 @@ import { useState } from 'react';
  *
  * tryClose: function to attempt to close the popup. Accepts three callbacks. If first callback returns true, the popup will be closed, and the second callback will run. If not, the popup will not close, and the third callback will run.
  */
-export const usePopup = (defaultValue: boolean = false) => {
+export const usePopup = (defaultValue = false) => {
   const [popupOpen, setPopupOpen] = useState<boolean>(defaultValue);
 
   const open = () => setPopupOpen(true);

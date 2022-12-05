@@ -9,8 +9,8 @@ import { isInPast } from './time';
  */
 export const displayDate = (
   date: Date,
-  noDate: string = 'Schedule',
-  pastDue: string = ''
+  noDate = 'Schedule',
+  pastDue = ''
 ): string => {
   if (!date) return noDate;
   if (isToday(date)) return 'Today';

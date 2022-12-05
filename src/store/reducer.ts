@@ -74,7 +74,7 @@ export const reducer: ReducerType<StateType, ActionType> = (state, action) => {
       const index = getIndexFromId(state.list, id);
       if (index < 0) return state; // don't change the state if the item is not in the list
       const oldTask = { ...state.list[index] };
-      let updatedItem = { ...oldTask, ...data }; // get all properties of original item, replace with any conflicting properties in payload data
+      const updatedItem = { ...oldTask, ...data }; // get all properties of original item, replace with any conflicting properties in payload data
       const newList = sliceList(state.list, index, updatedItem);
       return { ...state, list: newList };
     }
@@ -117,7 +117,7 @@ export const reducer: ReducerType<StateType, ActionType> = (state, action) => {
     // updates an existing label, and updates the task list with the new label
     // payload: { old: {name, color, id}, update: {name, color} }
     case UPDATE_LABEL: {
-      let { id, data } = payload;
+      const { id, data } = payload;
       const index = getIndexFromId(state.labels, id);
       if (index < 0) return state;
       const label = { ...state.labels[index], ...data };

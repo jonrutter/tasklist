@@ -1,13 +1,10 @@
 import React from 'react';
 
 // routing
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // mui
 import { ListItemButton } from '@mui/material';
-
-// hooks
-import { useRenderLink } from '../../hooks/useRenderLink';
 
 type Props = React.PropsWithChildren<{
   to: string;
@@ -18,10 +15,9 @@ type Props = React.PropsWithChildren<{
  */
 export const NavLink: React.FC<Props> = ({ to, children }) => {
   const { pathname } = useLocation();
-  const renderLink = useRenderLink(to);
 
   return (
-    <ListItemButton component={renderLink} selected={pathname === to}>
+    <ListItemButton component={Link} to={to} selected={pathname === to}>
       {children}
     </ListItemButton>
   );
