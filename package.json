@@ -24,10 +24,10 @@
   "scripts": {
     "start": "vite --host",
     "build": "vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore && prettier . --check --ignore-path .gitignore"
   },
   "browserslist": {
     "production": [
