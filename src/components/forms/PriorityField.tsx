@@ -35,7 +35,7 @@ type Props = {
 export const PriorityField: React.FC<Props> = ({ priority, setPriority }) => {
   const [anchor, handleOpen, handleClose, open] = usePopover();
 
-  let priorities: PriorityType[] = [1, 2, 3, 4];
+  const priorities: PriorityType[] = [1, 2, 3, 4];
 
   const handleClick = (num: PriorityType) => {
     setPriority(num);

@@ -20,13 +20,15 @@ import { usePopup } from '../hooks/usePopup';
 import { TaskType } from '../types';
 import { UpdateTask } from './forms/UpdateTask';
 
-export const DetailsGrid: React.FC = ({ children }) => (
+export const DetailsGrid: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => (
   <Grid container justifyContent="space-between">
     {children}
   </Grid>
 );
 
-export const ButtonGrid: React.FC = ({ children }) => (
+export const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Grid container sx={{ mt: 2 }} justifyContent="flex-end" spacing={2}>
     {children}
   </Grid>

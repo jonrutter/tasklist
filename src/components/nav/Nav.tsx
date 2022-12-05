@@ -15,7 +15,9 @@ import NavList from './NavList';
 import { useStore } from '../../store/useStore';
 import { TOGGLE_NAV } from '../../store/actions';
 
-const NavDrawer: React.FC = ({ children }) => {
+type DrawerProps = React.PropsWithChildren;
+
+const NavDrawer: React.FC<DrawerProps> = ({ children }) => {
   const { dispatch, navOpen } = useStore();
   const toggleNav = () => dispatch({ type: TOGGLE_NAV });
 

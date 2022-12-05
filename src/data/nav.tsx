@@ -1,3 +1,5 @@
+import React from 'react';
+
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -11,6 +13,7 @@ import {
   isDueInFuture,
   isPastDue,
 } from '../utils/time';
+import { TaskType } from '../types';
 
 const none = () => false;
 const all = () => true;
@@ -18,7 +21,7 @@ const all = () => true;
 export type NavItemType = {
   title: string;
   to: string;
-  listCallback: any;
+  listCallback: (_: TaskType) => boolean | null;
   icon: JSX.Element;
 };
 

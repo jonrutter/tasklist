@@ -1,13 +1,8 @@
 import React from 'react';
 
 // mui
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material';
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
 // colors

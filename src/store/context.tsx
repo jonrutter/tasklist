@@ -12,7 +12,7 @@ export const StoreContext = React.createContext<ContextType>({
   dispatch: () => null,
 });
 
-type Props = {
+type Props = React.PropsWithChildren<{
   testDefaultState?: {
     list?: TaskType[];
     labels?: LabelType[];
@@ -20,7 +20,7 @@ type Props = {
     navOpen?: false;
     sortBy?: string;
   };
-};
+}>;
 
 export const StoreProvider: React.FC<Props> = ({
   testDefaultState,

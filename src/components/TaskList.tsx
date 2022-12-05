@@ -18,6 +18,18 @@ type Props = {
   label: string;
 };
 
+const sortCallbacks = {
+  alphabetically: (a: TaskType, b: TaskType) => (a.name < b.name ? -1 : 1),
+  'due date': (a: TaskType, b: TaskType) => {
+    if (!b.due) return -1;
+    if (!a.due) return 1;
+    return a.due.getTime() - b.due.getTime();
+  },
+  priority: (a: TaskType, b: TaskType) => a.priority - b.priority,
+  'date added': () => 0,
+  default: () => 0,
+};
+
 /**
  * Renders a list of tasks.
  */
@@ -35,33 +47,10 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
     setDeletedTask('');
   };
 
-  // sorting
-  let sortCallback = (a: any, b: any) => 0;
-  switch (sortBy) {
-    case 'alphabetically':
-      sortCallback = (a, b) => {
-        return a.name < b.name ? -1 : 1;
-      };
-      break;
-    case 'due date':
-      sortCallback = (a, b) => {
-        if (!b.due) return -1;
-        if (!a.due) return 1;
-        return a.due - b.due;
-      };
-      break;
-    case 'priority':
-      sortCallback = (a, b) => a.priority - b.priority;
-      break;
-    case 'date added':
-    case 'default':
-    default:
-      sortCallback = (a, b) => 0;
-  }
+  const sortedList = [...list];
 
-  let sortedList = [...list];
-
-  if (sortBy !== 'default') sortedList.sort(sortCallback);
+  if (sortBy !== 'default')
+    sortedList.sort(sortCallbacks[sortBy as keyof typeof sortCallbacks]);
 
   return (
     <Box>

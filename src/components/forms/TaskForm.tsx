@@ -67,7 +67,7 @@ export const TaskForm: React.FC<Props> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    let data = { name, description };
+    const data = { name, description };
     processSubmit(data);
   };
 
@@ -84,7 +84,6 @@ export const TaskForm: React.FC<Props> = ({
           name="name"
           label="Task"
           required
-          autoFocus
           fullWidth
           sx={{ mb: 2 }}
         />

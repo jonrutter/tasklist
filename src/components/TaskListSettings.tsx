@@ -18,7 +18,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // store
 import { useStore } from '../store/useStore';
-import { CHANGE_SORT_ORDER } from '../store/actions';
 
 // hooks
 import { usePopover } from '../hooks/usePopover';
@@ -26,7 +25,7 @@ import { usePopover } from '../hooks/usePopover';
 // components
 import ListHeader from './ListHeader';
 
-type SortOption =
+export type SortOption =
   | 'default'
   | 'alphabetically'
   | 'due date'
@@ -67,13 +66,11 @@ export const TaskListSettings = () => {
   const { dispatch, sortBy } = useStore();
   const [anchor, handleOpen, handleClose, open] = usePopover();
 
-  // store
-  const sortCreator = (order: SortOption) => ({
-    type: CHANGE_SORT_ORDER,
-    payload: order,
-  });
-
-  const setSortBy = (order: SortOption) => dispatch(sortCreator(order));
+  const setSortBy = (order: SortOption) =>
+    dispatch({
+      type: 'CHANGE_SORT_ORDER',
+      payload: order,
+    });
 
   const handleClick = (value: SortOption) => {
     setSortBy(value);
