@@ -9,9 +9,9 @@ import { ListItemButton } from '@mui/material';
 // hooks
 import { useRenderLink } from '../../hooks/useRenderLink';
 
-type Props = {
+type Props = React.PropsWithChildren<{
   to: string;
-};
+}>;
 
 /**
  * Renders a React Router link as a MUI ListItemButton, for use as a navigation link.

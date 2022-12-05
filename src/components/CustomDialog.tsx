@@ -3,10 +3,10 @@ import React from 'react';
 // mui
 import { Dialog } from '@mui/material';
 
-type Props = {
+type Props = React.PropsWithChildren<{
   open: boolean;
   onClose: () => void;
-};
+}>;
 
 /**
  * Renders a dialog box.

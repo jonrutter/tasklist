@@ -12,10 +12,10 @@ import {
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 
-type Props = {
+type Props = React.PropsWithChildren<{
   label: string;
   secondaryAction: JSX.Element;
-};
+}>;
 
 /**
  * Renders a MUI List component with a dropdownlist.
