@@ -6,7 +6,6 @@ import type { SlideProps } from '@mui/material';
 
 // store
 import { useStore } from '../store/useStore';
-import { RESTORE_TASK } from '../store/actions';
 
 type BaseSlideProps = {
   direction: 'right';
@@ -33,14 +32,11 @@ export const UndoAlert: React.FC<Props> = ({
 }) => {
   const { dispatch } = useStore();
 
-  // store
-  const restoreCreator = () => ({
-    type: RESTORE_TASK,
-    payload: id,
-  });
-
   const restoreTask = () => {
-    dispatch(restoreCreator());
+    dispatch({
+      type: 'RESTORE_TASK',
+      payload: id,
+    });
     handleClose();
   };
 

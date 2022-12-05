@@ -51,7 +51,7 @@ export const createLabel = (label: LabelIncompleteType): LabelType => ({
  *
  * Does not mutate the original list.
  */
-export const sliceList = (list: unknown[], index: number, item?: unknown) =>
+export const sliceList = <T>(list: T[], index: number, item?: T) =>
   item
     ? [...list.slice(0, index), item, ...list.slice(index + 1)]
     : [...list.slice(0, index), ...list.slice(index + 1)];

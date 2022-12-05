@@ -14,7 +14,6 @@ import WarningDialog from '../components/WarningDialog';
 
 // store
 import { useStore } from '../store/useStore';
-import { EMPTY_TRASH } from '../store/actions';
 
 // custom hooks
 import { usePopup } from '../hooks/usePopup';
@@ -23,10 +22,8 @@ export const Completed: React.FC = () => {
   const { dispatch, deleted } = useStore();
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
 
-  const deleteCreator = () => ({ type: EMPTY_TRASH });
-
   const deleteAll = () => {
-    dispatch(deleteCreator());
+    dispatch({ type: 'EMPTY_TRASH' });
     closeWarning();
   };
 

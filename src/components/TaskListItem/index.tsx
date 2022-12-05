@@ -17,7 +17,6 @@ import TaskDetails from '../TaskDetails';
 
 // store
 import { useStore } from '../../store/useStore';
-import { DELETE_TASK } from '../../store/actions';
 
 // hooks
 import { usePopup } from '../../hooks/usePopup';
@@ -41,15 +40,10 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
   // destructuring task properties
   const { name, id } = task;
 
-  // deleting items
-  const deleteCreator = (id: string) => {
-    return { type: DELETE_TASK, payload: id };
-  };
-
   const deleteTask = useCallback(
     (id: string) => {
       handleDelete(id);
-      dispatch(deleteCreator(id));
+      dispatch({ type: 'DELETE_TASK', payload: id });
     },
     [dispatch, handleDelete]
   );

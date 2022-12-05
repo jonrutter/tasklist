@@ -56,11 +56,14 @@ export const LabelSettings: React.FC<Props> = ({ id }) => {
     closeSettings();
   };
 
-  const deleteLabel = () =>
-    dispatch({
-      type: 'DELETE_LABEL',
-      payload: { label },
-    });
+  const deleteLabel = () => {
+    if (label) {
+      dispatch({
+        type: 'DELETE_LABEL',
+        payload: { label },
+      });
+    }
+  };
 
   const htmlID = settingsOpen ? 'priority-popup' : undefined;
 

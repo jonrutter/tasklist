@@ -34,13 +34,9 @@ export const CompletedTask: React.FC<Props> = ({ task }) => {
   // destructuring task properties
   const { name, description, priority, due, id, label } = task;
 
-  const restoreCreator = (id: string) => {
-    return { type: 'RESTORE_TASK', payload: id };
-  };
-
   const restoreTask = (id: string) => {
     setChecked(false);
-    dispatch(restoreCreator(id));
+    dispatch({ type: 'RESTORE_TASK', payload: id });
   };
 
   if (!name || !id) return null;
