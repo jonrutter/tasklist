@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-// mui
+// components
 import {
   ListItem,
   ListItemIcon,
@@ -8,36 +8,31 @@ import {
   ListItemText,
   Divider,
 } from '@mui/material';
-
-// components
-import TaskDeleteControl from './TaskDeleteControl';
-import TaskPrimaryInfo from './TaskPrimaryInfo';
-import TaskSecondaryInfo from './TaskSecondaryInfo';
-import TaskDetails from '../TaskDetails';
+import { TaskCheckbox } from './TaskCheckbox';
+import { TaskName } from './TaskName';
+import { TaskSummary } from './TaskSummary';
+import { TaskDetails } from './TaskDetails';
 
 // store
-import { useStore } from '../../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // hooks
-import { usePopup } from '../../hooks/usePopup';
+import { usePopup } from '@/hooks/usePopup';
 
-import { TaskType } from '../../types';
+// types
+import { TaskType } from '@/types';
 
 type Props = {
   handleDelete: (id: string) => void;
   task: TaskType;
 };
 
-/**
- * Renders a task's data as a MUI ListItem.
- */
-export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
+export const Task: React.FC<Props> = ({ handleDelete, task }) => {
   const { dispatch } = useStore();
-  // checkbox state: when true, the item is deleted
   const [checked, setChecked] = useState(false);
   const [detailsOpen, openDetails, closeDetails] = usePopup(false);
 
-  // destructuring task properties
+  // getting task name and id
   const { name, id } = task;
 
   const deleteTask = useCallback(
@@ -45,10 +40,9 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
       handleDelete(id);
       dispatch({ type: 'DELETE_TASK', payload: id });
     },
-    [dispatch, handleDelete]
+    [handleDelete]
   );
 
-  // creates 500ms lag between clicking checkbox and deleting item.
   useEffect(() => {
     let deleteTimeout: number | undefined = undefined;
     if (checked) {
@@ -59,7 +53,6 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
     return () => window.clearTimeout(deleteTimeout);
   }, [checked, deleteTask, id]);
 
-  // check handler
   const handleCheck = () => {
     setChecked((prev) => !prev);
   };
@@ -70,17 +63,17 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
     <>
       <ListItem disablePadding>
         <ListItemIcon>
-          <TaskDeleteControl
+          <TaskCheckbox
             checked={checked}
-            handleCheck={handleCheck}
+            onCheck={handleCheck}
             taskName={task.name}
           />
         </ListItemIcon>
         <ListItemButton onClick={openDetails}>
           <ListItemText
             disableTypography
-            primary={<TaskPrimaryInfo name={name} />}
-            secondary={<TaskSecondaryInfo {...task} />}
+            primary={<TaskName name={name} />}
+            secondary={<TaskSummary {...task} />}
           />
         </ListItemButton>
       </ListItem>
@@ -93,5 +86,3 @@ export const TaskListItem: React.FC<Props> = ({ handleDelete, task }) => {
     </>
   );
 };
-
-export default TaskListItem;

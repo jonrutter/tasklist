@@ -1,30 +1,29 @@
 import React from 'react';
 
-// mui
+// components
 import { Checkbox } from '@mui/material';
 
+// types
 type Props = {
   checked: boolean;
-  handleCheck: () => void;
+  onCheck: () => void;
   taskName: string;
   action?: 'Delete' | 'Restore';
 };
 
 /**
- * Renders the UI for a checkbox that deletes or restores a task.
+ * Renders the UI for a checkbox that can delete/restore a task.
  */
-export const TaskDeleteControl: React.FC<Props> = ({
+export const TaskCheckbox: React.FC<Props> = ({
   checked,
-  handleCheck,
-  action = 'Delete',
+  onCheck,
+  action = 'delete',
   taskName,
 }) => (
   <Checkbox
     edge="end"
-    onChange={handleCheck}
+    onChange={onCheck}
     checked={checked}
     inputProps={{ 'aria-label': `${action} task: ${taskName}` }}
   />
 );
-
-export default TaskDeleteControl;

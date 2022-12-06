@@ -1,34 +1,25 @@
 import React from 'react';
 
-// mui
-import { Button, Box, Typography, Grid } from '@mui/material';
-
 // components
-import PriorityIcon from './PriorityIcon';
-import DateChip from './DateChip';
-import WarningDialog from './WarningDialog';
-import CustomDialog from './CustomDialog';
-import LabelDisplay from './LabelDisplay';
+import { Button, Box, Typography, Grid } from '@mui/material';
+import { PriorityIcon } from '@/components/PriorityIcon';
+import { DateChip } from '@/components/DateChip';
+import { WarningDialog } from '@/components/WarningDialog';
+import { CustomDialog } from '@/components/CustomDialog';
+import { LabelDisplay } from '@/components/LabelDisplay';
 
 // store
-import { useStore } from '../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // hooks
-import { usePopup } from '../hooks/usePopup';
+import { usePopup } from '@/hooks/usePopup';
 
 // types
-import { TaskType } from '../types';
-import { UpdateTask } from './forms/UpdateTask';
+import { TaskType } from '@/types';
+import { UpdateTask } from '@/components/forms/UpdateTask';
 
-export const DetailsGrid: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => (
-  <Grid container justifyContent="space-between">
-    {children}
-  </Grid>
-);
-
-export const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
+/* Child Components */
+const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
   <Grid container sx={{ mt: 2 }} justifyContent="flex-end" spacing={2}>
     {children}
   </Grid>
@@ -39,7 +30,7 @@ type BoxProps = {
   openEditor: () => void;
 };
 
-const TaskDetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
+const DetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
   <Box sx={{ p: 3 }}>
     <Typography variant="h6" component="h3" sx={{ mb: 3 }}>
       {task.name}
@@ -78,6 +69,8 @@ const TaskDetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
   </Box>
 );
 
+/* Task Details */
+
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -85,23 +78,22 @@ type Props = {
 };
 
 /**
- * Renders a modal box to display the Task's details.
+ * Renders a modal box to display the Task's full details.
  */
 export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
   const { list } = useStore();
-  // get all details of currently-opened task
   const task = list.find((task) => task.id === id) || null;
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor, tryCloseEditor] = usePopup(false);
 
-  // closes the TaskDetails dialog
+  // TODO: this could use a major refactor for clarity
   const confirmClose = () => {
     closeWarning();
     closeEditor();
     onClose();
   };
 
-  // attempts to close the ui
+  // attemps to close the ui
   const tryClose = () =>
     tryCloseEditor(() => !editorOpen, confirmClose, openWarning);
 
@@ -116,7 +108,7 @@ export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
           onDiscard={openWarning}
         />
       ) : (
-        <TaskDetailsBox task={task} openEditor={openEditor} />
+        <DetailsBox task={task} openEditor={openEditor} />
       )}
       <WarningDialog
         open={warningOpen}
@@ -130,5 +122,3 @@ export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
     </CustomDialog>
   );
 };
-
-export default TaskDetails;

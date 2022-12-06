@@ -4,7 +4,7 @@ import React from 'react';
 import { List, Typography, Box } from '@mui/material';
 
 // components
-import CompletedTask from './CompletedTask';
+import { CompletedTask } from '../features/tasks';
 import { TaskType } from '../types';
 
 type Props = {

@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import { List, Typography, Box, Grid } from '@mui/material';
 
 // components
-import TaskListItem from './TaskListItem';
+import { Task as TaskListItem } from '@/features/tasks';
 import TaskListSettings from './TaskListSettings';
 import UndoAlert from './UndoAlert';
 
