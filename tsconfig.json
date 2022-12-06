@@ -15,7 +15,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@tasks/*": ["./src/features/tasks/*"]
+    }
   },
   "include": [".", "src", "src/custom.d.ts"],
   "exclude": ["node_modules"]
