@@ -1,11 +1,12 @@
 import React from 'react';
 
 // components
-import ShortChip from './ShortChip';
+import { ShortChip } from './ShortChip';
 
 // date
-import { displayDate } from '../utils/date';
+import { displayDate } from '@/utils/date';
 
+// types
 type Props = {
   date: Date;
   noLabel?: string;
@@ -43,5 +44,3 @@ export const DateChip: React.FC<Props> = ({
     <ShortChip color={color || undefined} label={label} variant="outlined" />
   );
 };
-
-export default DateChip;

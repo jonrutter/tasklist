@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   List,
   ListItem,
@@ -16,21 +16,20 @@ import {
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-// mui icons
+// icons
 import TodayIcon from '@mui/icons-material/Today';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
-// date-fns
-import add from 'date-fns/add';
-
 // utils
+import add from 'date-fns/add';
 import { displayDate } from '../../utils/date';
 
 // hooks
 import { usePopover } from '../../hooks/usePopover';
 
+// types
 type ItemProps = {
   title: string;
   icon: JSX.Element;

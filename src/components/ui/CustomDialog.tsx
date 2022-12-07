@@ -1,8 +1,9 @@
 import React from 'react';
 
-// mui
+// components
 import { Dialog } from '@mui/material';
 
+// types
 type Props = React.PropsWithChildren<{
   open: boolean;
   onClose: () => void;
@@ -21,5 +22,3 @@ export const CustomDialog: React.FC<Props> = ({ open, onClose, children }) => (
     {children}
   </Dialog>
 );
-
-export default CustomDialog;

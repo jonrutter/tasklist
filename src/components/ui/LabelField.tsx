@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   Box,
   Button,
@@ -14,23 +14,24 @@ import {
   Divider,
   Tooltip,
 } from '@mui/material';
+import { ListHeader } from './ListHeader';
+
+// icons
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
 // store
-import { useStore } from '../../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // colors
-import { colors } from '../../data/colors';
-
-// components
-import ListHeader from '../ListHeader';
+import { colors } from '@/data/colors';
 
 // hooks
-import { usePopover } from '../../hooks/usePopover';
+import { usePopover } from '@/hooks/usePopover';
 
-import { LabelType } from '../../types';
+// types
+import { LabelType } from '@/types';
 
 type Props = {
   label: LabelType | undefined;

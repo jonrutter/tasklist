@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   Dialog,
   DialogTitle,
@@ -10,6 +10,7 @@ import {
   Button,
 } from '@mui/material';
 
+// types
 type Props = {
   open: boolean;
   title: string;
@@ -54,5 +55,3 @@ export const WarningDialog: React.FC<Props> = ({
     </DialogActions>
   </Dialog>
 );
-
-export default WarningDialog;

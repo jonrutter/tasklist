@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import { Chip } from '@mui/material';
 
 // types
@@ -15,5 +15,3 @@ export const ShortChip: OverridableComponent<
 > = (props: ChipProps) => (
   <Chip {...props} sx={{ '&.MuiChip-root': { height: '24px' } }} />
 );
-
-export default ShortChip;

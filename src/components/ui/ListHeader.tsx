@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import { ListItem, ListItemText } from '@mui/material';
 
 type Props = React.PropsWithChildren;
@@ -15,5 +15,3 @@ export const ListHeader: React.FC<Props> = ({ children }) => (
     </ListItemText>
   </ListItem>
 );
-
-export default ListHeader;

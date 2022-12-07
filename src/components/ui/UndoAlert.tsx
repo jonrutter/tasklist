@@ -1,11 +1,13 @@
 import React from 'react';
 
-// mui
+// components
 import { Snackbar, Alert, Button, Slide } from '@mui/material';
-import type { SlideProps } from '@mui/material';
 
 // store
-import { useStore } from '../store/useStore';
+import { useStore } from '@/store/useStore';
+
+// types
+import type { SlideProps } from '@mui/material';
 
 type BaseSlideProps = {
   direction: 'right';
@@ -66,5 +68,3 @@ export const UndoAlert: React.FC<Props> = ({
     </Snackbar>
   );
 };
-
-export default UndoAlert;

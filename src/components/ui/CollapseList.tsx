@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// mui
+// components
 import {
   List,
   ListItemButton,
@@ -9,6 +9,8 @@ import {
   ListItemIcon,
   ListItem,
 } from '@mui/material';
+
+// icons
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 
@@ -47,5 +49,3 @@ export const CollapseList: React.FC<Props> = ({
     </List>
   );
 };
-
-export default CollapseList;

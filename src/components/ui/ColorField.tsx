@@ -1,12 +1,16 @@
 import React from 'react';
 
-// mui
+// components
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import type { SelectChangeEvent } from '@mui/material';
+
+// icons
 import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
 // colors
-import { colors, ColorType, isColor } from '../../data/colors';
+import { colors, ColorType, isColor } from '@/data/colors';
+
+// types
+import type { SelectChangeEvent } from '@mui/material';
 
 const capitalize = (str: string) =>
   str[0].toUpperCase() + str.slice(1).toLowerCase();

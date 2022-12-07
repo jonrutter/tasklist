@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   Box,
   IconButton,
@@ -13,15 +13,14 @@ import {
   Divider,
   Tooltip,
 } from '@mui/material';
-
-// components
-import PriorityIcon from '../PriorityIcon';
-import ListHeader from '../ListHeader';
+import { PriorityIcon } from './PriorityIcon';
+import { ListHeader } from './ListHeader';
 
 // hooks
-import { usePopover } from '../../hooks/usePopover';
-import { PriorityType } from '../../types';
+import { usePopover } from '@/hooks/usePopover';
+import { PriorityType } from '@/types';
 
+// types
 type Props = {
   priority: PriorityType;
   setPriority: React.Dispatch<React.SetStateAction<PriorityType>>;
