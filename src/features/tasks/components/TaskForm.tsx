@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-// mui
-import { Box, Grid, Paper, Typography, Button, TextField } from '@mui/material';
-
 // components
-import { PriorityField } from './PriorityField';
-import { TaskIncompleteType, LabelType, PriorityType } from '../../types';
-import { LabelField } from './LabelField';
-import { DateField } from './DateField';
+import { Box, Grid, Paper, Typography, Button, TextField } from '@mui/material';
+import { PriorityField } from '@/components/ui/PriorityField';
+import { LabelField } from '@/components/ui/LabelField';
+import { DateField } from '@/components/ui/DateField';
+
+// types
+import type { TaskIncompleteType, LabelType, PriorityType } from '@/types';
 
 type FormDataType = {
   name?: string;

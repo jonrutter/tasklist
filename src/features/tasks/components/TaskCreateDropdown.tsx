@@ -1,18 +1,18 @@
 import React from 'react';
 
-// mui
-import { Box, Button } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-
 // components
-import { CreateTask } from './forms/CreateTask';
-import WarningDialog from './WarningDialog';
+import { Box, Button } from '@mui/material';
+import { CreateTask } from './CreateTask';
+import { WarningDialog } from '@/components/ui/WarningDialog';
 
 // hooks
-import { usePopup } from '../hooks/usePopup';
+import { usePopup } from '@/hooks/usePopup';
+
+// icons
+import AddIcon from '@mui/icons-material/Add';
 
 // types
-import { PriorityType, LabelType } from '../types';
+import { PriorityType, LabelType } from '@/types';
 
 type DefaultItem = {
   name?: string;
@@ -67,5 +67,3 @@ export const TaskCreateDropdown: React.FC<Props> = ({ defaultItem }) => {
     </Box>
   );
 };
-
-export default TaskCreateDropdown;

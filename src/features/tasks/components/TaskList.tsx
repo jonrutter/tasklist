@@ -1,23 +1,23 @@
-import React, { useState, useCallback } from 'react';
-
-// mui
-import { List, Typography, Box, Grid } from '@mui/material';
+import React, { useState, useCallback, useMemo } from 'react';
 
 // components
-import { Task as TaskListItem } from '@/features/tasks';
-import TaskListSettings from './TaskListSettings';
-import UndoAlert from './UndoAlert';
+import { List, Typography, Box, Grid } from '@mui/material';
+import { Task } from './Task';
+import { TaskListSettings } from '@/components/TaskListSettings';
+import { UndoAlert } from '@/components/ui/UndoAlert';
 
 // store
-import { useStore } from '../store/useStore';
+import { useStore } from '@/store/useStore';
 
-import { TaskType } from '../types';
+// types
+import { TaskType } from '@/types';
 
 type Props = {
   list: TaskType[];
   label: string;
 };
 
+// callback mapping
 const sortCallbacks = {
   alphabetically: (a: TaskType, b: TaskType) => (a.name < b.name ? -1 : 1),
   'due date': (a: TaskType, b: TaskType) => {
@@ -31,7 +31,7 @@ const sortCallbacks = {
 };
 
 /**
- * Renders a list of tasks.
+ * Renders the main list of tasks
  */
 export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
   const { sortBy } = useStore();
@@ -47,10 +47,13 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
     setDeletedTask('');
   };
 
-  const sortedList = [...list];
-
-  if (sortBy !== 'default')
-    sortedList.sort(sortCallbacks[sortBy as keyof typeof sortCallbacks]);
+  const sortedList = useMemo(() => {
+    if (sortBy !== 'default') {
+      return list.sort(sortCallbacks[sortBy as keyof typeof sortCallbacks]);
+    } else {
+      return [...list];
+    }
+  }, [sortBy, list]);
 
   return (
     <Box>
@@ -67,11 +70,7 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
       {!listEmpty && (
         <List>
           {sortedList.map((task) => (
-            <TaskListItem
-              key={task.id}
-              task={task}
-              handleDelete={handleDeleteTask}
-            />
+            <Task key={task.id} task={task} handleDelete={handleDeleteTask} />
           ))}
         </List>
       )}
@@ -83,5 +82,3 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
     </Box>
   );
 };
-
-export default TaskList;

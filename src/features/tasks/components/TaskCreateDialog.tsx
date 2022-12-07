@@ -1,16 +1,16 @@
 import React from 'react';
 
-// mui
+// components
 import { IconButton, Tooltip } from '@mui/material';
+import { CustomDialog } from '@/components/ui/CustomDialog';
+import { WarningDialog } from '@/components/ui/WarningDialog';
+import { CreateTask } from './CreateTask';
+
+// icons
 import AddIcon from '@mui/icons-material/Add';
 
-// components
-import CustomDialog from './CustomDialog';
-import WarningDialog from './WarningDialog';
-import { CreateTask } from './forms/CreateTask';
-
 // hooks
-import { usePopup } from '../hooks/usePopup';
+import { usePopup } from '@/hooks/usePopup';
 
 /**
  * Handles all UI logic for rendering a task create form as a dialog box.
@@ -58,5 +58,3 @@ export const TaskCreateDialog: React.FC = () => {
     </>
   );
 };
-
-export default TaskCreateDialog;

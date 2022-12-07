@@ -1,11 +1,11 @@
 import React from 'react';
 
-// mui
-import { List, Typography, Box } from '@mui/material';
-
 // components
-import { CompletedTask } from '../features/tasks';
-import { TaskType } from '../types';
+import { List, Typography, Box } from '@mui/material';
+import { CompletedTask } from './CompletedTask';
+
+// types
+import type { TaskType } from '@/types';
 
 type Props = {
   list: TaskType[];
@@ -32,5 +32,3 @@ export const CompletedTaskList: React.FC<Props> = ({
     )}
   </Box>
 );
-
-export default CompletedTaskList;
