@@ -40,7 +40,7 @@ export const Task: React.FC<Props> = ({ handleDelete, task }) => {
       handleDelete(id);
       dispatch({ type: 'DELETE_TASK', payload: id });
     },
-    [handleDelete]
+    [handleDelete, dispatch]
   );
 
   useEffect(() => {
