@@ -2,11 +2,11 @@ import React from 'react';
 
 // components
 import { Button, Box, Typography, Grid } from '@mui/material';
-import { PriorityIcon } from '@/components/PriorityIcon';
-import { DateChip } from '@/components/DateChip';
-import { WarningDialog } from '@/components/WarningDialog';
-import { CustomDialog } from '@/components/CustomDialog';
-import { LabelDisplay } from '@/components/LabelDisplay';
+import { PriorityIcon } from '@/components/ui/PriorityIcon';
+import { DateChip } from '@/components/ui/DateChip';
+import { WarningDialog } from '@/components/ui/WarningDialog';
+import { CustomDialog } from '@/components/ui/CustomDialog';
+import { LabelDisplay } from '@/features/labels';
 
 // store
 import { useStore } from '@/store/useStore';
@@ -16,7 +16,7 @@ import { usePopup } from '@/hooks/usePopup';
 
 // types
 import { TaskType } from '@/types';
-import { UpdateTask } from '@/components/forms/UpdateTask';
+import { UpdateTask } from './UpdateTask';
 
 /* Child Components */
 const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (

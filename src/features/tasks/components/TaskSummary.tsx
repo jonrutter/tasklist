@@ -2,12 +2,12 @@ import React from 'react';
 
 // components
 import { Typography, Grid } from '@mui/material';
-import { DateChip } from '../../../components/DateChip';
-import { PriorityIcon } from '../../../components/PriorityIcon';
-import { LabelDisplay as Label } from '../../../components/LabelDisplay';
+import { DateChip } from '@/components/ui/DateChip';
+import { PriorityIcon } from '@/components/ui/PriorityIcon';
+import { LabelDisplay as Label } from '@/features/labels';
 
 // types
-import { PriorityType, LabelType } from '../../../types';
+import { PriorityType, LabelType } from '@/types';
 
 /* Child Components */
 
