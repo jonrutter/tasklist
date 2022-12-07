@@ -1,10 +1,13 @@
 import React from 'react';
 
+// components
 import { LabelForm } from './LabelForm';
 
-import { LabelType, LabelIncompleteType } from '../../types';
-import { UPDATE_LABEL } from '../../store/actions';
-import { useStore } from '../../store/useStore';
+// store
+import { useStore } from '@/store/useStore';
+
+// types
+import { LabelType, LabelIncompleteType } from '@/types';
 
 type Props = {
   onClose: () => void;
@@ -17,7 +20,7 @@ export const UpdateLabel: React.FC<Props> = ({ label, onClose, onDiscard }) => {
 
   const handleSubmit = (data: LabelIncompleteType) => {
     dispatch({
-      type: UPDATE_LABEL,
+      type: 'UPDATE_LABEL',
       payload: { id: label.id, data },
     });
     onClose();

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '@testing-library/jest-dom';
-import { render, screen, cleanup, waitFor } from '../../../utils/test-utils';
+import { render, screen, cleanup, waitFor } from '@/utils/test-utils';
 import userEvent from '@testing-library/user-event';
 
 // component

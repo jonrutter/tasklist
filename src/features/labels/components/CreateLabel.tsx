@@ -1,9 +1,13 @@
 import React from 'react';
 
+// components
 import { LabelForm } from './LabelForm';
 
-import { LabelIncompleteType } from '../../types';
-import { useStore } from '../../store/useStore';
+// store
+import { useStore } from '@/store/useStore';
+
+// types
+import { LabelIncompleteType } from '@/types';
 
 type Props = {
   onClose: () => void;

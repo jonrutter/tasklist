@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
 // components
-import { ColorField } from './ColorField';
-
-// utils
+import { ColorField } from '@/components/ui/ColorField';
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
-import { ColorType } from '../../data/colors';
-import { LabelIncompleteType } from '../../types';
+
+// data
+import { ColorType } from '@/data/colors';
+
+// types
+import { LabelIncompleteType } from '@/types';
 
 type DefaultValues = {
   name?: string;
@@ -83,5 +85,3 @@ export const LabelForm: React.FC<Props> = ({
     </Box>
   );
 };
-
-export default LabelForm;

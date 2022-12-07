@@ -1,14 +1,16 @@
 import React from 'react';
 
-// mui
+// components
 import { Grid, Typography } from '@mui/material';
+
+// icons
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-// colors
-import { colors } from '../data/colors';
+// data
+import { colors } from '@/data/colors';
 
 // types
-import { LabelType } from '../types';
+import { LabelType } from '@/types';
 
 type Props = {
   label: LabelType;
@@ -36,5 +38,3 @@ export const LabelDisplay: React.FC<Props> = ({ label }) => {
     </Grid>
   );
 };
-
-export default LabelDisplay;
