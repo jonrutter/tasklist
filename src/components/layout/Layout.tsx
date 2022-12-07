@@ -1,11 +1,10 @@
 import React from 'react';
 
-// mui
-import { Box } from '@mui/material';
-
 // components
-import Spacebar from './Spacebar';
+import { Box } from '@mui/material';
+import { Spacebar } from './Spacebar';
 
+// types
 type Props = React.PropsWithChildren;
 
 /**
@@ -25,5 +24,3 @@ export const Layout: React.FC<Props> = ({ children }) => (
     {children}
   </Box>
 );
-
-export default Layout;

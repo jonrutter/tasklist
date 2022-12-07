@@ -1,17 +1,18 @@
 import React from 'react';
 
-// mui
+// components
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { NavLink } from './NavLink';
+import { LabelSettings } from './LabelSettings';
+
+// icons
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-// components
-import NavLink from './NavLink';
-import LabelSettings from './LabelSettings';
-
 // colors
-import { colors } from '../../data/colors';
+import { colors } from '@/data/colors';
 
-import type { LabelType } from '../../types';
+// types
+import type { LabelType } from '@/types';
 
 type Props = {
   label: LabelType;
@@ -37,5 +38,3 @@ export const NavLabelItem: React.FC<Props> = ({ label }) => {
     </ListItem>
   );
 };
-
-export default NavLabelItem;

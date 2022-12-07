@@ -1,12 +1,11 @@
 import React from 'react';
 
-// mui
-import { ListItem, ListItemIcon, Badge, ListItemText } from '@mui/material';
-
 // components
-import NavLink from './NavLink';
+import { ListItem, ListItemIcon, Badge, ListItemText } from '@mui/material';
+import { NavLink } from './NavLink';
 
-import type { TaskType } from '../../types';
+// types
+import type { TaskType } from '@/types';
 
 export type NavLinkType = {
   title: string;
@@ -38,5 +37,3 @@ export const NavItem: React.FC<NavLinkType> = ({
     </NavLink>
   </ListItem>
 );
-
-export default NavItem;

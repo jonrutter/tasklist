@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import { Toolbar } from '@mui/material';
 
 /**
@@ -12,5 +12,3 @@ export const Spacebar: React.FC = () => (
     <div style={{ marginTop: '1rem', minHeight: '1rem' }}></div>
   </>
 );
-
-export default Spacebar;

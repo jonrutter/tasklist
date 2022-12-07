@@ -3,9 +3,10 @@ import React from 'react';
 // routing
 import { Link, useLocation } from 'react-router-dom';
 
-// mui
+// components
 import { ListItemButton } from '@mui/material';
 
+// types
 type Props = React.PropsWithChildren<{
   to: string;
 }>;
@@ -22,5 +23,3 @@ export const NavLink: React.FC<Props> = ({ to, children }) => {
     </ListItemButton>
   );
 };
-
-export default NavLink;

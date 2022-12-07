@@ -1,14 +1,13 @@
 import React from 'react';
 
-// mui
-import { List } from '@mui/material';
-
 // components
-import NavItem from './NavItem';
+import { List } from '@mui/material';
+import { NavItem } from './NavItem';
 
 // store
 import { useStore } from '../../store/useStore';
 
+// types
 import type { NavItemType } from '../../data/nav';
 
 type Props = {
@@ -40,5 +39,3 @@ export const NavList: React.FC<Props> = ({ navList }) => {
     </List>
   );
 };
-
-export default NavList;

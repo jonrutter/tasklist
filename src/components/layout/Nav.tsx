@@ -1,25 +1,22 @@
 import React from 'react';
 
-// mui
+// components
 import { Box, Drawer, Divider } from '@mui/material';
+import { NavLabelsList } from './NavLabelsList';
+import { Spacebar } from './Spacebar';
+import { NavList } from './NavList';
 
 // data
-import { navItems, completed } from '../../data/nav';
-
-// components
-import NavLabelsList from './NavLabelsList';
-import Spacebar from '../Spacebar';
-import NavList from './NavList';
+import { navItems, completed } from '@/data/nav';
 
 // store
-import { useStore } from '../../store/useStore';
-import { TOGGLE_NAV } from '../../store/actions';
+import { useStore } from '@/store/useStore';
 
 type DrawerProps = React.PropsWithChildren;
 
 const NavDrawer: React.FC<DrawerProps> = ({ children }) => {
   const { dispatch, navOpen } = useStore();
-  const toggleNav = () => dispatch({ type: TOGGLE_NAV });
+  const toggleNav = () => dispatch({ type: 'TOGGLE_NAV' });
 
   const drawerWidth = 240;
   const container = window.document.body;
@@ -71,5 +68,3 @@ export const Nav: React.FC = () => (
     </Box>
   </NavDrawer>
 );
-
-export default Nav;

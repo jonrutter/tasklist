@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   AppBar,
   Toolbar,
@@ -9,6 +9,9 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
+import { TaskCreateDialog } from '@/features/tasks';
+
+// icons
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -16,14 +19,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
 // store
-import { useStore } from '../store/useStore';
-import { TOGGLE_NAV } from '../store/actions';
+import { useStore } from '@/store/useStore';
 
 // images
-import Logo from '../images/logo.svg';
-
-// components
-import TaskCreateDialog from './TaskCreateDialog';
+import Logo from '@/images/logo.svg';
 
 /**
  * Renders the site header.
@@ -31,7 +30,7 @@ import TaskCreateDialog from './TaskCreateDialog';
 export const Header: React.FC = () => {
   const { dispatch, navOpen } = useStore();
 
-  const toggleNav = () => dispatch({ type: TOGGLE_NAV });
+  const toggleNav = () => dispatch({ type: 'TOGGLE_NAV' });
 
   return (
     <>
@@ -90,5 +89,3 @@ export const Header: React.FC = () => {
     </>
   );
 };
-
-export default Header;

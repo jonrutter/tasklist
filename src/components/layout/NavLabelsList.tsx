@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 
-// mui
-import { ListItem, ListItemText, IconButton, Tooltip } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-
 // components
-import CollapseList from '../CollapseList';
-import NavLabelItem from './NavLabelItem';
-import CustomDialog from '../CustomDialog';
-import { CreateLabel } from '../forms/CreateLabel';
+import { ListItem, ListItemText, IconButton, Tooltip } from '@mui/material';
+import { CollapseList } from '@/components/ui/CollapseList';
+import { NavLabelItem } from './NavLabelItem';
+import { CustomDialog } from '@/components/ui/CustomDialog';
+import { CreateLabel } from '@/features/labels';
 
 // store
-import { useStore } from '../../store/useStore';
+import { useStore } from '@/store/useStore';
+
+// types
+import AddIcon from '@mui/icons-material/Add';
 
 type ButtonProps = {
   onClick: () => void;
@@ -63,5 +63,3 @@ export const NavLabelsList = () => {
     </>
   );
 };
-
-export default NavLabelsList;

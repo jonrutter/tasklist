@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   Box,
   IconButton,
@@ -13,22 +13,24 @@ import {
   ListItemIcon,
   Tooltip,
 } from '@mui/material';
+import { WarningDialog } from '@/components/ui/WarningDialog';
+import { CustomDialog } from '@/components/ui/CustomDialog';
+import { UpdateLabel } from '@/features/labels';
+
+// icons
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 // store
-import { useStore } from '../../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // hooks
-import { usePopup } from '../../hooks/usePopup';
-import { usePopover } from '../../hooks/usePopover';
+import { usePopup } from '@/hooks/usePopup';
+import { usePopover } from '@/hooks/usePopover';
 
-// components
-import WarningDialog from '../WarningDialog';
-import CustomDialog from '../CustomDialog';
-import { UpdateLabel } from '../forms/UpdateLabel';
-import { LabelType } from '../../types';
+// types
+import { LabelType } from '@/types';
 
 type Props = {
   id: string;
@@ -121,5 +123,3 @@ export const LabelSettings: React.FC<Props> = ({ id }) => {
     </Box>
   );
 };
-
-export default LabelSettings;
