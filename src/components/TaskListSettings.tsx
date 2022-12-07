@@ -1,6 +1,6 @@
 import React from 'react';
 
-// mui
+// components
 import {
   Box,
   IconButton,
@@ -13,18 +13,19 @@ import {
   Divider,
   Tooltip,
 } from '@mui/material';
+import { ListHeader } from '@/components/ui/ListHeader';
+
+// icons
 import CheckIcon from '@mui/icons-material/Check';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // store
-import { useStore } from '../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // hooks
-import { usePopover } from '../hooks/usePopover';
+import { usePopover } from '@/hooks/usePopover';
 
-// components
-import ListHeader from './ListHeader';
-
+// types
 export type SortOption =
   | 'default'
   | 'alphabetically'
@@ -126,5 +127,3 @@ export const TaskListSettings = () => {
     </Box>
   );
 };
-
-export default TaskListSettings;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// icons
 import InboxIcon from '@mui/icons-material/Inbox';
 import TodayIcon from '@mui/icons-material/Today';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -7,12 +8,15 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import UpcomingIcon from '@mui/icons-material/Upcoming';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+// utils
 import {
   isDueToday,
   isDueTomorrow,
   isDueInFuture,
   isPastDue,
 } from '../utils/time';
+
+// types
 import { TaskType } from '../types';
 
 const none = () => false;

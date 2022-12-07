@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { LabelType, TaskType } from '../types';
+import { TagType, TaskType } from '../types';
 
 import { StateType, ActionType, defaultState, reducer } from './reducer';
 
@@ -15,7 +15,7 @@ export const StoreContext = React.createContext<ContextType>({
 type Props = React.PropsWithChildren<{
   testDefaultState?: {
     list?: TaskType[];
-    labels?: LabelType[];
+    tags?: TagType[];
     deleted?: TaskType[];
     navOpen?: false;
     sortBy?: string;
