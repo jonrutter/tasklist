@@ -8,17 +8,17 @@ import { Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 // components
-import Layout from '../components/Layout';
-import CompletedTaskList from '../components/CompletedTaskList';
-import WarningDialog from '../components/WarningDialog';
+import { Layout } from '@/components/layout/Layout';
+import { CompletedTaskList } from '@/features/tasks';
+import { WarningDialog } from '@/components/ui/WarningDialog';
 
 // store
-import { useStore } from '../store/useStore';
+import { useStore } from '@/store/useStore';
 
 // custom hooks
-import { usePopup } from '../hooks/usePopup';
+import { usePopup } from '@/hooks/usePopup';
 
-export const Completed: React.FC = () => {
+export const CompletedPage: React.FC = () => {
   const { dispatch, deleted } = useStore();
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
 
@@ -59,5 +59,3 @@ export const Completed: React.FC = () => {
     </Layout>
   );
 };
-
-export default Completed;

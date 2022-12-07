@@ -11,9 +11,8 @@ import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 // components
-import Layout from '../components/Layout';
-import TaskList from '../components/TaskList';
-import TaskCreateDropdown from '../components/TaskCreateDropdown';
+import { Layout } from '@/components/layout/Layout';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // store
 import { useStore } from '../store/useStore';
@@ -24,7 +23,7 @@ import { TaskType, LabelType } from '../types';
 const hasLabel = (label?: LabelType) => (listItem: TaskType) =>
   get(listItem, 'label.name', null) === get(label, 'name');
 
-export const Label: React.FC = () => {
+export const LabelPage: React.FC = () => {
   const { list, labels } = useStore();
   const { label: paramLabelName } = useParams();
 
@@ -45,5 +44,3 @@ export const Label: React.FC = () => {
     </Layout>
   );
 };
-
-export default Label;

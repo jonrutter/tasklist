@@ -4,9 +4,8 @@ import React, { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 // components
-import Layout from '../components/Layout';
-import TaskList from '../components/TaskList';
-import TaskCreateDropdown from '../components/TaskCreateDropdown';
+import { Layout } from '@/components/layout/Layout';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // store
 import { useStore } from '../store/useStore';
@@ -14,7 +13,7 @@ import { useStore } from '../store/useStore';
 // utils
 import { isDueToday } from '../utils/time';
 
-export const Today: React.FC = () => {
+export const TodayPage: React.FC = () => {
   const { list } = useStore();
 
   const filteredList = list.filter(isDueToday);
@@ -31,5 +30,3 @@ export const Today: React.FC = () => {
     </Layout>
   );
 };
-
-export default Today;

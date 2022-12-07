@@ -4,9 +4,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 // components
-import Layout from '../components/Layout';
-import TaskList from '../components/TaskList';
-import TaskCreateDropdown from '../components/TaskCreateDropdown';
+import { Layout } from '@/components/layout/Layout';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // store
 import { useStore } from '../store/useStore';
@@ -14,7 +13,7 @@ import { useStore } from '../store/useStore';
 // utils
 import { isDueInFuture } from '../utils/time';
 
-export const Upcoming: React.FC = () => {
+export const UpcomingPage: React.FC = () => {
   const { list } = useStore();
 
   const filteredList = list.filter(isDueInFuture);
@@ -29,5 +28,3 @@ export const Upcoming: React.FC = () => {
     </Layout>
   );
 };
-
-export default Upcoming;

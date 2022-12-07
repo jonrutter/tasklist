@@ -4,14 +4,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 // components
-import Layout from '../components/Layout';
-import TaskList from '../components/TaskList';
-import { TaskCreateDropdown } from '../components/TaskCreateDropdown';
+import { Layout } from '@/components/layout/Layout';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // store
 import { useStore } from '../store/useStore';
 
-export const Home: React.FC = () => {
+export const HomePage: React.FC = () => {
   const { list } = useStore();
 
   return (
@@ -24,5 +23,3 @@ export const Home: React.FC = () => {
     </Layout>
   );
 };
-
-export default Home;
