@@ -1,25 +1,26 @@
+// utils
+import {
+  getItem,
+  createTag,
+  createTask,
+  purgeTag,
+  sliceList,
+  updateTags,
+} from './utils';
+
 // types
 import {
-  LabelIncompleteType,
-  LabelType,
+  TagIncompleteType,
+  TagType,
   TaskIncompleteType,
   TaskType,
 } from '../types';
-
-import {
-  getItem,
-  createLabel,
-  createTask,
-  purgeLabel,
-  sliceList,
-  updateLabels,
-} from './utils';
-import { SortOption } from '../components/TaskListSettings';
-import { Reducer } from 'react';
+import type { SortOption } from '../components/TaskListSettings';
+import type { Reducer } from 'react';
 
 export type StateType = {
   list: TaskType[];
-  labels: LabelType[];
+  tags: TagType[];
   deleted: TaskType[];
   navOpen: boolean;
   sortBy: string;
@@ -57,24 +58,24 @@ export type ActionType =
       payload: SortOption;
     }
   | {
-      type: 'ADD_LABEL';
-      payload: LabelIncompleteType;
+      type: 'ADD_TAG';
+      payload: TagIncompleteType;
     }
   | {
-      type: 'UPDATE_LABEL';
-      payload: { id: string; data: LabelIncompleteType };
+      type: 'UPDATE_TAG';
+      payload: { id: string; data: TagIncompleteType };
     }
   | {
-      type: 'DELETE_LABEL';
-      payload: { label: LabelType };
+      type: 'DELETE_TAG';
+      payload: { tag: TagType };
     };
 
 export type ReducerType<S, A> = (state: S, action: A) => S;
 
 // default state
-export const defaultState = {
+export const defaultState: StateType = {
   list: (getItem('list') as TaskType[]) || [],
-  labels: (getItem('labels') as LabelType[]) || [],
+  tags: (getItem('tags') as TagType[]) || [],
   deleted: (getItem('deleted') as TaskType[]) || [],
   navOpen: false,
   sortBy: localStorage.getItem('sortBy') || 'default',
@@ -83,7 +84,7 @@ export const defaultState = {
 /**
  * Returns the index of the first list item with the given id, or -1 if none found.
  */
-const getIndexFromId = (list: TaskType[] | LabelType[], id: string): number => {
+const getIndexFromId = (list: TaskType[] | TagType[], id: string): number => {
   return list.findIndex((item) => item.id === id);
 };
 
@@ -139,49 +140,42 @@ export const reducer: Reducer<StateType, ActionType> = (state, action) => {
     case 'CLOSE_NAV': {
       return { ...state, navOpen: false };
     }
-    // creates a new label
-    // payload: { label: {name, color} }
-    case 'ADD_LABEL': {
+    // creates a new tag
+    case 'ADD_TAG': {
       const incomplete = action.payload;
-      const label = createLabel(incomplete);
-      const newLabels = [...state.labels, label];
-      return { ...state, labels: newLabels };
+      const tag = createTag(incomplete);
+      const newTags = [...state.tags, tag];
+      return { ...state, tags: newTags };
     }
-    // updates an existing label, and updates the task list with the new label
-    // payload: { old: {name, color, id}, update: {name, color} }
-    case 'UPDATE_LABEL': {
+    // updates an existing tag, and updates the task list with the new tag
+    case 'UPDATE_TAG': {
       const { id, data } = action.payload;
-      const index = getIndexFromId(state.labels, id);
+      const index = getIndexFromId(state.tags, id);
       if (index < 0) return state;
-      const label = { ...state.labels[index], ...data };
-      // insert new label into labels array
-      const newLabels = sliceList<LabelType>(state.labels, index, label);
-      // update task list by updating tasks with new label
-      const newList = updateLabels(state.list, state.labels[index], label);
-      const newDeleted = updateLabels(
-        state.deleted,
-        state.labels[index],
-        label
-      );
+      const tag = { ...state.tags[index], ...data };
+      // insert new tag into tags array
+      const newTags = sliceList<TagType>(state.tags, index, tag);
+      // update task list by updating tasks with new tag
+      const newList = updateTags(state.list, state.tags[index], tag);
+      const newDeleted = updateTags(state.deleted, state.tags[index], tag);
       return {
         ...state,
-        labels: newLabels,
+        tags: newTags,
         list: newList,
         deleted: newDeleted,
       };
     }
-    // deletes an existing label, and updates the task list by deleting all references to the old label
-    // payload: { label: name, color, id }
-    case 'DELETE_LABEL': {
-      const { label } = action.payload;
-      const index = getIndexFromId(state.labels, label.id);
+    // deletes an existing tag, and updates the task list by deleting all references to the old tag
+    case 'DELETE_TAG': {
+      const { tag } = action.payload;
+      const index = getIndexFromId(state.tags, tag.id);
       if (index < 0) return state;
-      const newLabels = sliceList<LabelType>(state.labels, index);
-      const newList = purgeLabel(state.list, label);
-      const newDeleted = purgeLabel(state.deleted, label);
+      const newTags = sliceList<TagType>(state.tags, index);
+      const newList = purgeTag(state.list, tag);
+      const newDeleted = purgeTag(state.deleted, tag);
       return {
         ...state,
-        labels: newLabels,
+        tags: newTags,
         list: newList,
         deleted: newDeleted,
       };

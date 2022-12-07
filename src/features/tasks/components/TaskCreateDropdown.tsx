@@ -12,14 +12,14 @@ import { usePopup } from '@/hooks/usePopup';
 import AddIcon from '@mui/icons-material/Add';
 
 // types
-import { PriorityType, LabelType } from '@/types';
+import { PriorityType, TagType } from '@/types';
 
 type DefaultItem = {
   name?: string;
   description?: string;
   priority?: PriorityType;
   due?: Date | number;
-  label?: LabelType;
+  tag?: TagType;
   date?: Date | number;
   id?: string;
 };

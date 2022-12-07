@@ -8,7 +8,7 @@ import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { ColorType } from '@/data/colors';
 
 // types
-import { LabelIncompleteType } from '@/types';
+import { TagIncompleteType } from '@/types';
 
 type DefaultValues = {
   name?: string;
@@ -16,20 +16,20 @@ type DefaultValues = {
 };
 
 type Props = {
-  onSubmit: (data: LabelIncompleteType) => void;
+  onSubmit: (data: TagIncompleteType) => void;
   onClose: () => void;
   defaultValues?: DefaultValues;
   title?: string;
 };
 
 /**
- * Renders a form to create/update a label.
+ * Renders a form to create/update a tag.
  */
-export const LabelForm: React.FC<Props> = ({
+export const TagForm: React.FC<Props> = ({
   onSubmit,
   onClose,
   defaultValues,
-  title = 'Create Label',
+  title = 'Create Tag',
 }) => {
   const [name, setName] = useState<string>(defaultValues?.name || '');
   // default color should be an empty string instead of undefined, to avoid initializing the color field as an uncontrolled component. then convert empty colors to undefined on submission
@@ -77,7 +77,7 @@ export const LabelForm: React.FC<Props> = ({
               type="submit"
               color="success"
             >
-              Add Label
+              Add Tag
             </Button>
           </Grid>
         </Grid>

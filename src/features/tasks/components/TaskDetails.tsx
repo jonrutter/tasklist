@@ -6,7 +6,7 @@ import { PriorityIcon } from '@/components/ui/PriorityIcon';
 import { DateChip } from '@/components/ui/DateChip';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 import { CustomDialog } from '@/components/ui/CustomDialog';
-import { LabelDisplay } from '@/features/labels';
+import { Tag } from '@/features/tags';
 
 // store
 import { useStore } from '@/store/useStore';
@@ -48,9 +48,9 @@ const DetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
       )}
       <Grid item>
         <Grid container alignItems="center" spacing={2}>
-          {task.label && (
+          {task.tag && (
             <Grid item>
-              <LabelDisplay label={task.label} />
+              <Tag tag={task.tag} />
             </Grid>
           )}
           <Grid item>

@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import type {
   TaskIncompleteType,
   TaskType,
-  LabelIncompleteType,
-  LabelType,
+  TagIncompleteType,
+  TagType,
 } from '../types';
 
 import type { StateType } from './reducer';
@@ -39,11 +39,11 @@ export const createTask = (task: TaskIncompleteType): TaskType => ({
 });
 
 /**
- * Returns a new, correctly formatted label object.
+ * Returns a new, correctly formatted tag object.
  */
-export const createLabel = (label: LabelIncompleteType): LabelType => ({
-  ...label,
-  id: label.id || uuidv4(),
+export const createTag = (tag: TagIncompleteType): TagType => ({
+  ...tag,
+  id: tag.id || uuidv4(),
 });
 
 /**
@@ -57,39 +57,38 @@ export const sliceList = <T>(list: T[], index: number, item?: T) =>
     : [...list.slice(0, index), ...list.slice(index + 1)];
 
 /**
- * Returns true or false whether a task has a given label.
+ * Returns true or false whether a task has a given tag.
  */
-export const taskHasLabel = (task: TaskType, label: LabelType): boolean =>
-  task.label?.id === label.id;
+export const taskHasTag = (task: TaskType, tag: TagType): boolean =>
+  task.tag?.id === tag.id;
 
 /**
- * Returns a new copy of a task, with an updated label
+ * Returns a new copy of a task, with an updated tag
  */
-export const updateTaskLabel = (task: TaskType, newLabel?: LabelType) => ({
+export const updateTaskTag = (task: TaskType, newTag?: TagType) => ({
   ...task,
-  label: newLabel,
+  tag: newTag,
 });
 
 /**
- * Returns a new copy of a task without its label
+ * Returns a new copy of a task without its tag
  */
-export const clearTaskLabel = (task: TaskType) =>
-  updateTaskLabel(task, undefined);
+export const clearTaskTag = (task: TaskType) => updateTaskTag(task, undefined);
 
 /**
- * Updates all references to a label in a task list.
+ * Updates all references to a tag in a task list.
  */
-export const updateLabels = (
+export const updateTags = (
   list: TaskType[],
-  oldLabel: LabelType,
-  newLabel: LabelType
+  oldTag: TagType,
+  newTag: TagType
 ): TaskType[] =>
   list.map((task) =>
-    taskHasLabel(task, oldLabel) ? updateTaskLabel(task, newLabel) : task
+    taskHasTag(task, oldTag) ? updateTaskTag(task, newTag) : task
   );
 
 /**
- * Returns a copy of a list with all references to the label removed.
+ * Returns a copy of a list with all references to the tag removed.
  */
-export const purgeLabel = (list: TaskType[], label: LabelType) =>
-  list.map((task) => (taskHasLabel(task, label) ? clearTaskLabel(task) : task));
+export const purgeTag = (list: TaskType[], tag: TagType) =>
+  list.map((task) => (taskHasTag(task, tag) ? clearTaskTag(task) : task));

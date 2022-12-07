@@ -4,10 +4,10 @@ import React from 'react';
 import { Typography, Grid } from '@mui/material';
 import { DateChip } from '@/components/ui/DateChip';
 import { PriorityIcon } from '@/components/ui/PriorityIcon';
-import { LabelDisplay as Label } from '@/features/labels';
+import { Tag } from '@/features/tags';
 
 // types
-import { PriorityType, LabelType } from '@/types';
+import { PriorityType, TagType } from '@/types';
 
 /* Child Components */
 
@@ -34,10 +34,10 @@ const TaskPriority: React.FC<{ priority?: PriorityType }> = ({ priority }) =>
     </Grid>
   ) : null;
 
-const TaskLabel: React.FC<{ label?: LabelType }> = ({ label }) =>
-  label ? (
+const TaskTag: React.FC<{ tag?: TagType }> = ({ tag }) =>
+  tag ? (
     <Grid item>
-      <Label label={label} />
+      <Tag tag={tag} />
     </Grid>
   ) : null;
 
@@ -47,20 +47,20 @@ type Props = {
   description: string;
   due?: Date;
   priority: PriorityType;
-  label?: LabelType;
+  tag?: TagType;
 };
 
 export const TaskSummary: React.FC<Props> = ({
   description,
   due,
   priority,
-  label,
+  tag,
 }) => (
   <>
     <TaskDescription description={description} />
     <Grid container spacing={2} alignItems="center">
       <TaskDueDate due={due} />
-      <TaskLabel label={label} />
+      <TaskTag tag={tag} />
       <TaskPriority priority={priority} />
     </Grid>
   </>

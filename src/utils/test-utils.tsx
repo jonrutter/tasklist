@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { StoreProvider } from '../store/context';
+import { StoreProvider } from '@/store/context';
 import { HelmetProvider } from 'react-helmet-async';
 
 import type { RenderOptions } from '@testing-library/react';
@@ -14,11 +14,11 @@ const Wrapper: React.FC<Props> = ({ children }) => (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <StoreProvider
         testDefaultState={{
-          labels: [
+          tags: [
             {
-              name: 'Preloaded Test Label',
+              name: 'Preloaded Test Tag',
               color: 'blue',
-              id: 'preloaded-test-label',
+              id: 'preloaded-test-tag',
             },
           ],
         }}

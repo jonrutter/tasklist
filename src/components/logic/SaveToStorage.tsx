@@ -4,10 +4,10 @@ import { useEffect } from 'react';
 import { useStore } from '@/store/useStore';
 
 // types
-import type { TaskType, LabelType } from '@/types';
+import type { TaskType, TagType } from '@/types';
 
-type StorageKey = 'list' | 'labels' | 'deleted';
-type StorageValue = TaskType[] | LabelType[];
+type StorageKey = 'list' | 'tags' | 'deleted';
+type StorageValue = TaskType[] | TagType[];
 
 // helper
 const setItem = (name: StorageKey, value: StorageValue) =>
@@ -17,14 +17,14 @@ const setItem = (name: StorageKey, value: StorageValue) =>
  * Utility component. Listens for state changes, and updates localStorage with the new state whenever state changes.
  */
 export const SaveToStorage = () => {
-  const { list, labels, deleted } = useStore();
+  const { list, tags, deleted } = useStore();
 
   useEffect(() => {
     setItem('list', list);
-    setItem('labels', labels);
+    setItem('tags', tags);
     setItem('deleted', deleted);
     // setItem('sortBy', sortBy);
-  }, [list, labels, deleted]);
+  }, [list, tags, deleted]);
 
   return null;
 };

@@ -10,17 +10,17 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { colors } from '@/data/colors';
 
 // types
-import { LabelType } from '@/types';
+import { TagType } from '@/types';
 
 type Props = {
-  label: LabelType;
+  tag: TagType;
 };
 
 /**
- * Renders a label, with a colored tag.
+ * Renders a tag, with a colored tag.
  */
-export const LabelDisplay: React.FC<Props> = ({ label }) => {
-  const { color, name } = label;
+export const Tag: React.FC<Props> = ({ tag }) => {
+  const { color, name } = tag;
   return (
     <Grid container alignItems="center">
       <Grid item sx={{ mr: 1, height: 'auto' }}>

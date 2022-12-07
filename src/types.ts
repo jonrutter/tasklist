@@ -2,12 +2,12 @@ import { ColorType } from './data/colors';
 
 export type PriorityType = 1 | 2 | 3 | 4;
 
-export interface LabelIncompleteType {
+export interface TagIncompleteType {
   name: string;
   color?: ColorType;
   id?: string;
 }
-export interface LabelType extends LabelIncompleteType {
+export interface TagType extends TagIncompleteType {
   id: string;
 }
 
@@ -16,7 +16,7 @@ export interface TaskIncompleteType {
   description: string;
   priority: PriorityType;
   due?: Date;
-  label?: LabelType;
+  tag?: TagType;
   date?: Date;
   id?: string;
 }

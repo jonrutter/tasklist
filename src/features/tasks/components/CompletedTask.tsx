@@ -25,7 +25,7 @@ export const CompletedTask: React.FC<Props> = ({ task }) => {
   const [checked, setChecked] = useState(true);
 
   // destructuring task properties
-  const { name, description, priority, due, id, label } = task;
+  const { name, description, priority, due, id, tag } = task;
 
   const restoreTask = (id: string) => {
     setChecked(false);
@@ -54,7 +54,7 @@ export const CompletedTask: React.FC<Props> = ({ task }) => {
               description={description}
               due={due}
               priority={priority}
-              label={label}
+              tag={tag}
             />
           }
         />

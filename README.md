@@ -26,7 +26,7 @@ A lightweight, intuitive, open source to-do list app.
 
 TaskList is an open source to-do list web application, built with TypeScript, React, and Material UI.
 
-TaskList supports creating, updating, and deleting tasks, which can be tagged and filtered by labels, due dates, and priority level.
+TaskList supports creating, updating, and deleting tasks, which can be tagged and filtered by tags, due dates, and priority level.
 
 <img src="./github/main.png" alt="Preview of TaskList" width="600px" />
 

@@ -23,7 +23,7 @@ const ComponentWithDefaults = (
       name: 'Test Name',
       description: 'Test Description',
       priority: 1,
-      label: { name: 'Test Label', color: 'blue', id: 'test-label-id' },
+      tag: { name: 'Test Tag', color: 'blue', id: 'test-tag-id' },
       due: new Date(),
     }}
   />
@@ -49,8 +49,8 @@ describe('TaskForm', () => {
     expect(screen.getByLabelText(/set due date/i)).toHaveTextContent(
       /schedule/i
     );
-    // label
-    expect(screen.getByLabelText(/set label/i)).toHaveTextContent('');
+    // tag
+    expect(screen.getByLabelText(/set tag/i)).toHaveTextContent('');
     // priority
     screen.getByLabelText('Set Priority, priority is currently 4');
   });
@@ -65,10 +65,8 @@ describe('TaskForm', () => {
     );
     // due date
     expect(screen.getByLabelText(/set due date/i)).toHaveTextContent(/today/i);
-    // label
-    expect(screen.getByLabelText(/update label/i)).toHaveTextContent(
-      'Test Label'
-    );
+    // tag
+    expect(screen.getByLabelText(/update tag/i)).toHaveTextContent('Test Tag');
     // priority
     screen.getByLabelText('Set Priority, priority is currently 1');
   });
@@ -126,45 +124,45 @@ describe('TaskForm', () => {
     // due date should be removed and button should again have text content of "SCHEDULE"
     expect(dueDateButton).toHaveTextContent(/schedule/i);
   });
-  it('supports adding and removing labels', async () => {
+  it('supports adding and removing tags', async () => {
     render(Component);
 
-    // the label button should initially show no label
-    const emptyLabelButton = screen.getByLabelText(/set label/i);
-    expect(emptyLabelButton).toHaveTextContent('');
+    // the tag button should initially show no tag
+    const emptyTagButton = screen.getByLabelText(/set tag/i);
+    expect(emptyTagButton).toHaveTextContent('');
 
-    // clicking the label button should open the label popup
-    userEvent.click(emptyLabelButton);
+    // clicking the tag button should open the tag popup
+    userEvent.click(emptyTagButton);
     await waitFor(() => {
       // the popup should be visible
-      expect(screen.getByTestId('label-popup')).toBeInTheDocument();
-      // the label popup should display the preloaded test label,
-      screen.getByText(/preloaded test label/i);
-      screen.getByText(/no label/i);
+      expect(screen.getByTestId('tag-popup')).toBeInTheDocument();
+      // the tag popup should display the preloaded test tag,
+      screen.getByText(/preloaded test tag/i);
+      screen.getByText(/no tag/i);
     });
 
-    // clicking the preloaded test label should update the form data and close the label popup
-    userEvent.click(screen.getByText(/preloaded test label/i));
+    // clicking the preloaded test tag should update the form data and close the tag popup
+    userEvent.click(screen.getByText(/preloaded test tag/i));
     await waitFor(() => {
-      expect(screen.queryByTestId('label-popup')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('tag-popup')).not.toBeInTheDocument();
     });
 
-    // the label button should now show the updated label
-    expect(emptyLabelButton).not.toBeInTheDocument();
-    const filledLabelButton = screen.getByLabelText(/update label/i);
-    expect(filledLabelButton).toHaveTextContent(/preloaded test label/i);
+    // the tag button should now show the updated tag
+    expect(emptyTagButton).not.toBeInTheDocument();
+    const filledTagButton = screen.getByLabelText(/update tag/i);
+    expect(filledTagButton).toHaveTextContent(/preloaded test tag/i);
 
-    // clearing the label should revert the previous changes
-    userEvent.click(filledLabelButton);
+    // clearing the tag should revert the previous changes
+    userEvent.click(filledTagButton);
     await waitFor(() => {
-      expect(screen.getByTestId('label-popup')).toBeInTheDocument();
+      expect(screen.getByTestId('tag-popup')).toBeInTheDocument();
     });
-    userEvent.click(screen.getByText(/no label/i));
+    userEvent.click(screen.getByText(/no tag/i));
     await waitFor(() => {
-      expect(screen.queryByTestId('label-popup')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('tag-popup')).not.toBeInTheDocument();
     });
-    expect(filledLabelButton).not.toBeInTheDocument();
-    const newEmptyButton = screen.getByLabelText(/set label/i);
+    expect(filledTagButton).not.toBeInTheDocument();
+    const newEmptyButton = screen.getByLabelText(/set tag/i);
     expect(newEmptyButton).toHaveTextContent('');
   });
   it('supports adding and removing a priority level', async () => {

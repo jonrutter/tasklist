@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// app
 import App from './App';
+
+// styles
 import CssBaseline from '@mui/material/CssBaseline';
 
 // store

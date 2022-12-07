@@ -33,13 +33,13 @@ export const ColorField: React.FC<Props> = ({ color, setColor }) => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel id="color-dropdown-label">Label Color</InputLabel>
+      <InputLabel id="color-dropdown-label">Tag Color</InputLabel>
       <Select
         labelId="color-dropdown-label"
         id="color-dropdown"
         value={color}
         onChange={handleChange}
-        label="Label Color"
+        label="Tag Color"
         sx={{
           '& .MuiSelect-select': { display: 'flex' },
         }}

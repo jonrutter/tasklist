@@ -31,38 +31,38 @@ import { colors } from '@/data/colors';
 import { usePopover } from '@/hooks/usePopover';
 
 // types
-import { LabelType } from '@/types';
+import { TagType } from '@/types';
 
 type Props = {
-  label: LabelType | undefined;
-  setLabel: React.Dispatch<React.SetStateAction<LabelType | undefined>>;
+  tag: TagType | undefined;
+  setTag: React.Dispatch<React.SetStateAction<TagType | undefined>>;
 };
 
 /**
- * A form control to handle adding a label to a task.
+ * A form control to handle adding a tag to a task.
  */
-export const LabelField: React.FC<Props> = ({ label, setLabel }) => {
+export const TagField: React.FC<Props> = ({ tag, setTag }) => {
   const [anchor, handleOpen, handleClose, open] = usePopover();
-  const { labels } = useStore();
+  const { tags } = useStore();
 
-  const handleClick = (label: LabelType) => {
-    setLabel(label);
+  const handleClick = (tag: TagType) => {
+    setTag(tag);
     handleClose();
   };
 
-  const clearLabel = () => {
-    setLabel(undefined);
+  const clearTag = () => {
+    setTag(undefined);
     handleClose();
   };
 
-  const id = open ? 'label-popup' : undefined;
+  const id = open ? 'tag-popup' : undefined;
 
   return (
     <Box>
-      {label ? (
-        <Tooltip title="Update Label">
+      {tag ? (
+        <Tooltip title="Update Tag">
           <Button
-            aria-label="Update Label"
+            aria-label="Update Tag"
             onClick={handleOpen}
             sx={(theme) => ({
               color: theme.palette.text.primary,
@@ -73,19 +73,19 @@ export const LabelField: React.FC<Props> = ({ label, setLabel }) => {
             startIcon={
               <LocalOfferIcon
                 sx={{
-                  color: label.color
-                    ? colors[label.color as keyof typeof colors]
+                  color: tag.color
+                    ? colors[tag.color as keyof typeof colors]
                     : 'grey',
                 }}
               />
             }
           >
-            {label.name}
+            {tag.name}
           </Button>
         </Tooltip>
       ) : (
-        <Tooltip title="Set Label">
-          <IconButton aria-label="Set label" onClick={handleOpen}>
+        <Tooltip title="Set Tag">
+          <IconButton aria-label="Set tag" onClick={handleOpen}>
             <LocalOfferOutlinedIcon />
           </IconButton>
         </Tooltip>
@@ -99,31 +99,31 @@ export const LabelField: React.FC<Props> = ({ label, setLabel }) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       >
         <List>
-          <ListHeader>Label</ListHeader>
+          <ListHeader>Tag</ListHeader>
           <Divider />
-          {labels.map((label) => (
-            <ListItem key={label.id} sx={{ p: 0 }}>
-              <ListItemButton onClick={() => handleClick(label)}>
+          {tags.map((tag) => (
+            <ListItem key={tag.id} sx={{ p: 0 }}>
+              <ListItemButton onClick={() => handleClick(tag)}>
                 <ListItemIcon>
                   <LocalOfferIcon
                     sx={{
-                      color: label.color
-                        ? colors[label.color as keyof typeof colors]
+                      color: tag.color
+                        ? colors[tag.color as keyof typeof colors]
                         : 'grey',
                     }}
                   />
                 </ListItemIcon>
-                <ListItemText>{label.name}</ListItemText>
+                <ListItemText>{tag.name}</ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
           <Divider />
           <ListItem key={id} sx={{ p: 0 }}>
-            <ListItemButton onClick={clearLabel}>
+            <ListItemButton onClick={clearTag}>
               <ListItemIcon>
                 <DoNotDisturbAltIcon />
               </ListItemIcon>
-              <ListItemText>No Label</ListItemText>
+              <ListItemText>No Tag</ListItemText>
             </ListItemButton>
           </ListItem>
         </List>

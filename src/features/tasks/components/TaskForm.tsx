@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 // components
 import { Box, Grid, Paper, Typography, Button, TextField } from '@mui/material';
 import { PriorityField } from '@/components/ui/PriorityField';
-import { LabelField } from '@/components/ui/LabelField';
+import { TagField } from '@/components/ui/TagField';
 import { DateField } from '@/components/ui/DateField';
 
 // types
-import type { TaskIncompleteType, LabelType, PriorityType } from '@/types';
+import type { TaskIncompleteType, TagType, PriorityType } from '@/types';
 
 type FormDataType = {
   name?: string;
@@ -19,7 +19,7 @@ type DefaultValues = {
   description?: string;
   priority?: PriorityType;
   due?: Date;
-  label?: LabelType;
+  tag?: TagType;
   date?: Date;
   id?: string;
 };
@@ -44,8 +44,8 @@ export const TaskForm: React.FC<Props> = ({
   const [description, setDescription] = useState<string | undefined>(
     defaultValues?.description || undefined
   );
-  const [label, setLabel] = useState<LabelType | undefined>(
-    defaultValues?.label || undefined
+  const [tag, setTag] = useState<TagType | undefined>(
+    defaultValues?.tag || undefined
   );
   const [priority, setPriority] = useState<PriorityType>(
     defaultValues?.priority || 4
@@ -58,7 +58,7 @@ export const TaskForm: React.FC<Props> = ({
     const submissionData: TaskIncompleteType = {
       name: data.name || '',
       description: data.description || '',
-      label,
+      tag,
       priority,
       due,
     };
@@ -111,7 +111,7 @@ export const TaskForm: React.FC<Props> = ({
           <Grid item>
             <Grid container alignItems="center" spacing={2}>
               <Grid item>
-                <LabelField label={label} setLabel={setLabel} />
+                <TagField tag={tag} setTag={setTag} />
               </Grid>
               <Grid item>
                 <PriorityField priority={priority} setPriority={setPriority} />

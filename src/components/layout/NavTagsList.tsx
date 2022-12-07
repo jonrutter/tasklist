@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 // components
 import { ListItem, ListItemText, IconButton, Tooltip } from '@mui/material';
 import { CollapseList } from '@/components/ui/CollapseList';
-import { NavLabelItem } from './NavLabelItem';
+import { NavTagItem } from './NavTagItem';
 import { CustomDialog } from '@/components/ui/CustomDialog';
-import { CreateLabel } from '@/features/labels';
+import { CreateTag } from '@/features/tags';
 
 // store
 import { useStore } from '@/store/useStore';
@@ -17,22 +17,22 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-const AddLabelButton: React.FC<ButtonProps> = ({ onClick }) => (
-  <Tooltip title="New Label">
-    <IconButton edge="end" aria-label="new label" onClick={onClick}>
+const AddTagButton: React.FC<ButtonProps> = ({ onClick }) => (
+  <Tooltip title="New Tag">
+    <IconButton edge="end" aria-label="new tag" onClick={onClick}>
       <AddIcon />
     </IconButton>
   </Tooltip>
 );
 
 /**
- * A modified NavList for rendering NavLabels.
+ * A modified NavList for rendering NavTags.
  */
-export const NavLabelsList = () => {
-  const { labels } = useStore();
+export const NavTagsList = () => {
+  const { tags } = useStore();
   const [editing, setEditing] = useState(false);
 
-  const handleAddLabel = () => {
+  const handleAddTag = () => {
     setEditing(true);
   };
   const handleClose = () => {
@@ -42,23 +42,23 @@ export const NavLabelsList = () => {
   return (
     <>
       <CollapseList
-        label="Labels"
-        secondaryAction={<AddLabelButton onClick={handleAddLabel} />}
+        label="Tags"
+        secondaryAction={<AddTagButton onClick={handleAddTag} />}
       >
-        {labels.length ? (
+        {tags.length ? (
           <div>
-            {labels.map((label) => (
-              <NavLabelItem label={label} key={label.id} />
+            {tags.map((tag) => (
+              <NavTagItem tag={tag} key={tag.id} />
             ))}
           </div>
         ) : (
           <ListItem>
-            <ListItemText primary="You don't have any labels yet. Press the button to create some!" />
+            <ListItemText primary="You don't have any tags yet. Press the button to create some!" />
           </ListItem>
         )}
       </CollapseList>
       <CustomDialog open={editing} onClose={handleClose}>
-        <CreateLabel onDiscard={handleClose} onClose={handleClose} />
+        <CreateTag onDiscard={handleClose} onClose={handleClose} />
       </CustomDialog>
     </>
   );

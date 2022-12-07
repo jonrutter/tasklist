@@ -18,7 +18,7 @@ import {
   CompletedPage,
   PastDuePage,
   UpcomingPage,
-  LabelPage,
+  TagPage,
 } from '@/pages';
 
 export const App = () => (
@@ -36,7 +36,7 @@ export const App = () => (
           <Route path="/upcoming" element={<UpcomingPage />} />
           <Route path="/due" element={<PastDuePage />} />
           <Route path="/completed" element={<CompletedPage />} />
-          <Route path="/label/:label" element={<LabelPage />} />
+          <Route path="/tag/:tag" element={<TagPage />} />
         </Routes>
       </Box>
     </Box>

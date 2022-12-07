@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import { Box, Drawer, Divider } from '@mui/material';
-import { NavLabelsList } from './NavLabelsList';
+import { NavTagsList } from './NavTagsList';
 import { Spacebar } from './Spacebar';
 import { NavList } from './NavList';
 
@@ -62,7 +62,7 @@ export const Nav: React.FC = () => (
       <Spacebar />
       <NavList navList={navItems} />
       <Divider />
-      <NavLabelsList />
+      <NavTagsList />
       <Divider />
       <NavList navList={completed} />
     </Box>

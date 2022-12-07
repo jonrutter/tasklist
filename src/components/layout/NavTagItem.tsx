@@ -3,7 +3,7 @@ import React from 'react';
 // components
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { NavLink } from './NavLink';
-import { LabelSettings } from './LabelSettings';
+import { TagSettings } from './TagSettings';
 
 // icons
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -12,20 +12,20 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { colors } from '@/data/colors';
 
 // types
-import type { LabelType } from '@/types';
+import type { TagType } from '@/types';
 
 type Props = {
-  label: LabelType;
+  tag: TagType;
 };
 
 /**
- * A modified NavItem, for rendering links to label pages.
+ * A modified NavItem, for rendering links to tag pages.
  */
-export const NavLabelItem: React.FC<Props> = ({ label }) => {
-  const { name, color, id } = label;
+export const NavTagItem: React.FC<Props> = ({ tag }) => {
+  const { name, color, id } = tag;
   return (
-    <ListItem sx={{ p: 0, pl: 4 }} secondaryAction={<LabelSettings id={id} />}>
-      <NavLink to={`/label/${name}`}>
+    <ListItem sx={{ p: 0, pl: 4 }} secondaryAction={<TagSettings id={id} />}>
+      <NavLink to={`/tag/${name}`}>
         <ListItemIcon sx={{ minWidth: '32px' }}>
           <LocalOfferIcon
             sx={{

@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 import { CustomDialog } from '@/components/ui/CustomDialog';
-import { UpdateLabel } from '@/features/labels';
+import { UpdateTag } from '@/features/tags';
 
 // icons
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -30,22 +30,22 @@ import { usePopup } from '@/hooks/usePopup';
 import { usePopover } from '@/hooks/usePopover';
 
 // types
-import { LabelType } from '@/types';
+import { TagType } from '@/types';
 
 type Props = {
   id: string;
 };
 
 /**
- * Renders the UI for editing labels.
+ * Renders the UI for editing tags.
  *
- * Initially renders a button that, when pressed, renders a PopOver with options to edit or delete the label.
+ * Initially renders a button that, when pressed, renders a PopOver with options to edit or delete the tag.
  *
  */
-export const LabelSettings: React.FC<Props> = ({ id }) => {
-  const { labels, dispatch } = useStore();
-  const label: LabelType | undefined =
-    labels.find((label) => label.id === id) || undefined;
+export const TagSettings: React.FC<Props> = ({ id }) => {
+  const { tags, dispatch } = useStore();
+  const tag: TagType | undefined =
+    tags.find((tag) => tag.id === id) || undefined;
 
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor] = usePopup(false);
@@ -58,18 +58,18 @@ export const LabelSettings: React.FC<Props> = ({ id }) => {
     closeSettings();
   };
 
-  const deleteLabel = () => {
-    if (label) {
+  const deleteTag = () => {
+    if (tag) {
       dispatch({
-        type: 'DELETE_LABEL',
-        payload: { label },
+        type: 'DELETE_TAG',
+        payload: { tag },
       });
     }
   };
 
   const htmlID = settingsOpen ? 'priority-popup' : undefined;
 
-  if (!label) return null;
+  if (!tag) return null;
 
   return (
     <Box>
@@ -91,7 +91,7 @@ export const LabelSettings: React.FC<Props> = ({ id }) => {
               <ListItemIcon>
                 <EditIcon />
               </ListItemIcon>
-              <ListItemText>Edit Label</ListItemText>
+              <ListItemText>Edit Tag</ListItemText>
             </ListItemButton>
           </ListItem>
           <Divider />
@@ -100,23 +100,19 @@ export const LabelSettings: React.FC<Props> = ({ id }) => {
               <ListItemIcon>
                 <DeleteIcon />
               </ListItemIcon>
-              <ListItemText>Delete Label</ListItemText>
+              <ListItemText>Delete Tag</ListItemText>
             </ListItemButton>
           </ListItem>
         </List>
       </Popover>
       <CustomDialog open={!!editorOpen} onClose={confirmClose}>
-        <UpdateLabel
-          label={label}
-          onDiscard={openWarning}
-          onClose={confirmClose}
-        />
+        <UpdateTag tag={tag} onDiscard={openWarning} onClose={confirmClose} />
       </CustomDialog>
       <WarningDialog
         open={!!warningOpen}
-        title="Delete Label?"
+        title="Delete Tag?"
         body="Warning: this cannot be undone."
-        handleConfirm={deleteLabel}
+        handleConfirm={deleteTag}
         handleCancel={closeWarning}
         confirmLabel="Delete"
       />
