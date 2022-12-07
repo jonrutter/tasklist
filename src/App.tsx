@@ -3,25 +3,23 @@ import React from 'react';
 // routing
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// mui imports
+// components
 import { Box } from '@mui/material';
+import { Header } from '@/components/layout/Header';
+import { Nav } from '@/components/layout/Nav';
+import { SaveToStorage } from '@/components/logic/SaveToStorage';
+import { PageChange } from '@/components/logic/PageChange';
 
 // pages
-import Home from './pages/Home';
-import Today from './pages/Today';
-import Tomorrow from './pages/Tomorrow';
-import Completed from './pages/Completed';
-import PastDue from './pages/PastDue';
-import Upcoming from './pages/Upcoming';
-import Label from './pages/Label';
-
-// components
-import Header from './components/Header';
-import Nav from './components/nav/Nav';
-
-// util components
-import SaveToStorage from './components/SaveToStorage';
-import PageChange from './components/PageChange';
+import {
+  HomePage,
+  TodayPage,
+  TomorrowPage,
+  CompletedPage,
+  PastDuePage,
+  UpcomingPage,
+  LabelPage,
+} from '@/pages';
 
 export const App = () => (
   <Router>
@@ -32,13 +30,13 @@ export const App = () => (
       <Nav />
       <Box component="main" sx={{ width: '100%' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/today" element={<Today />} />
-          <Route path="/tomorrow" element={<Tomorrow />} />
-          <Route path="/upcoming" element={<Upcoming />} />
-          <Route path="/due" element={<PastDue />} />
-          <Route path="/completed" element={<Completed />} />
-          <Route path="/label/:label" element={<Label />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/today" element={<TodayPage />} />
+          <Route path="/tomorrow" element={<TomorrowPage />} />
+          <Route path="/upcoming" element={<UpcomingPage />} />
+          <Route path="/due" element={<PastDuePage />} />
+          <Route path="/completed" element={<CompletedPage />} />
+          <Route path="/label/:label" element={<LabelPage />} />
         </Routes>
       </Box>
     </Box>
