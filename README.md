@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100px" src="./github/logo.png" />
+  <img width="100px" src="./.github/logo.png" />
   <h1 align="center">TaskList</h1>
 </p>
 
@@ -28,15 +28,15 @@ TaskList is an open source to-do list web application, built with TypeScript, Re
 
 TaskList supports creating, updating, and deleting tasks, which can be tagged and filtered by tags, due dates, and priority level.
 
-<img src="./github/main.png" alt="Preview of TaskList" width="600px" />
+<img src="./.github/main.png" alt="Preview of TaskList" width="600px" />
 
 <br />
 
-![Preview of creating a new task](./github/form.png)
+![Preview of creating a new task](./.github/form.png)
 
 <br />
 
-![Preview of setting a due date](./github/due-date-dropdown.png)
+![Preview of setting a due date](./.github/due-date-dropdown.png)
 
 <br />
 
