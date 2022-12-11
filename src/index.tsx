@@ -8,7 +8,8 @@ import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // store
-import { StoreProvider } from './store/context';
+import { Provider as StoreProvider } from 'react-redux';
+import { store } from '@/store/store';
 
 // mui/date
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -27,7 +28,7 @@ ReactDOM.render(
   <React.StrictMode>
     <HelmetProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StoreProvider>
+        <StoreProvider store={store}>
           <CssBaseline />
           <App />
         </StoreProvider>
