@@ -10,7 +10,7 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { colors } from '@/data/colors';
 
 // types
-import { TagType } from '@/types';
+import type { TagType } from '../store/tagsSlice';
 
 type Props = {
   tag: TagType;
