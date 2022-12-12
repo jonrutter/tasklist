@@ -1,13 +1,10 @@
 // TODO: subscribe to tag updating/deleting actions
 
-import { createSlice } from '@reduxjs/toolkit';
-
-// utils
-import { nanoid } from 'nanoid';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 // types
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '@/store/store';
+import type { RootState } from '@/app';
 import type { TagType } from '@/features/tags';
 
 // types
@@ -39,7 +36,7 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<TaskIncompleteType>) => {
+    createTask: (state, action: PayloadAction<TaskIncompleteType>) => {
       const incompleteTask = action.payload;
       const newTask = {
         date: new Date(),
@@ -82,9 +79,9 @@ export const tasksSlice = createSlice({
   },
 });
 
-// export actions
+// export action creators
 export const {
-  addTask,
+  createTask,
   updateTask,
   markTaskCompleted,
   unmarkTaskCompleted,
@@ -103,5 +100,3 @@ export const selectCompleted = (state: RootState) =>
 
 export const selectTask = (id: string) => (state: RootState) =>
   state.tasks.find((item) => item.id === id);
-
-export const selectTaskIds = (state: RootState) => state.tasks.map((i) => i.id);
