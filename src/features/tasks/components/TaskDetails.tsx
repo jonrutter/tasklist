@@ -7,16 +7,17 @@ import { DateChip } from '@/components/ui/DateChip';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 import { CustomDialog } from '@/components/ui/CustomDialog';
 import { Tag } from '@/features/tags';
+import { UpdateTask } from './UpdateTask';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
+import { selectList } from '../store/tasksSlice';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 
 // types
-import { TaskType } from '@/types';
-import { UpdateTask } from './UpdateTask';
+import type { TaskType } from '../store/tasksSlice';
 
 /* Child Components */
 const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
@@ -81,7 +82,7 @@ type Props = {
  * Renders a modal box to display the Task's full details.
  */
 export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
-  const { list } = useStore();
+  const list = useSelector(selectList);
   const task = list.find((task) => task.id === id) || null;
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor, tryCloseEditor] = usePopup(false);

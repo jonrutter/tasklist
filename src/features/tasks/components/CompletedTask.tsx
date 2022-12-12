@@ -7,10 +7,11 @@ import { TaskName } from './TaskName';
 import { TaskSummary } from './TaskSummary';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useDispatch } from '@/app';
+import { unmarkTaskCompleted } from '../store/tasksSlice';
 
 // types
-import type { TaskType } from '@/types';
+import type { TaskType } from '../store/tasksSlice';
 
 type Props = {
   task: TaskType;
@@ -21,7 +22,7 @@ type Props = {
  */
 export const CompletedTask: React.FC<Props> = ({ task }) => {
   // store
-  const { dispatch } = useStore();
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(true);
 
   // destructuring task properties
@@ -29,7 +30,7 @@ export const CompletedTask: React.FC<Props> = ({ task }) => {
 
   const restoreTask = (id: string) => {
     setChecked(false);
-    dispatch({ type: 'RESTORE_TASK', payload: id });
+    dispatch(unmarkTaskCompleted(id));
   };
 
   if (!name || !id) return null;

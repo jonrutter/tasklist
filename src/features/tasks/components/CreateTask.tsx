@@ -4,10 +4,11 @@ import React from 'react';
 import { TaskForm } from './TaskForm';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useDispatch } from '@/app';
+import { createTask } from '../store/tasksSlice';
 
 // types
-import type { TaskIncompleteType } from '@/types';
+import type { TaskIncompleteType } from '../store/tasksSlice';
 
 type Props = {
   onClose: () => void;
@@ -18,13 +19,10 @@ type Props = {
  * Handles the logic of creating tasks, and composes TaskForm to render the form ui.
  */
 export const CreateTask: React.FC<Props> = ({ onClose, onDiscard }) => {
-  const { dispatch } = useStore();
+  const dispatch = useDispatch();
 
   const handleSubmit = (data: TaskIncompleteType) => {
-    dispatch({
-      type: 'ADD_TASK',
-      payload: { ...data },
-    });
+    dispatch(createTask(data));
     onClose();
   };
 

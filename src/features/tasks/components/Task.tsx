@@ -14,13 +14,14 @@ import { TaskSummary } from './TaskSummary';
 import { TaskDetails } from './TaskDetails';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useDispatch } from '@/app';
+import { markTaskCompleted } from '../store/tasksSlice';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 
 // types
-import { TaskType } from '@/types';
+import type { TaskType } from '../store/tasksSlice';
 
 type Props = {
   handleDelete: (id: string) => void;
@@ -28,7 +29,7 @@ type Props = {
 };
 
 export const Task: React.FC<Props> = ({ handleDelete, task }) => {
-  const { dispatch } = useStore();
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const [detailsOpen, openDetails, closeDetails] = usePopup(false);
 
@@ -38,7 +39,7 @@ export const Task: React.FC<Props> = ({ handleDelete, task }) => {
   const deleteTask = useCallback(
     (id: string) => {
       handleDelete(id);
-      dispatch({ type: 'DELETE_TASK', payload: id });
+      dispatch(markTaskCompleted(id));
     },
     [handleDelete, dispatch]
   );

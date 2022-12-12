@@ -3,14 +3,16 @@ import React, { useState, useCallback, useMemo } from 'react';
 // components
 import { List, Typography, Box, Grid } from '@mui/material';
 import { Task } from './Task';
-import { TaskListSettings } from '@/components/TaskListSettings';
 import { UndoAlert } from '@/components/ui/UndoAlert';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
+
+// settings
+import { TaskListSettings, selectSortBy } from '@/features/settings';
 
 // types
-import { TaskType } from '@/types';
+import type { TaskType } from '../store/tasksSlice';
 
 type Props = {
   list: TaskType[];
@@ -34,7 +36,7 @@ const sortCallbacks = {
  * Renders the main list of tasks
  */
 export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
-  const { sortBy } = useStore();
+  const sortBy = useSelector(selectSortBy);
   const listEmpty = !list.length;
   const [deletedTask, setDeletedTask] = useState<string>('');
 
