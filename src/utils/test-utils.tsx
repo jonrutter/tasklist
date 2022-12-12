@@ -3,28 +3,20 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { StoreProvider } from '@/store/context';
 import { HelmetProvider } from 'react-helmet-async';
 
+// store
+import { Provider as StoreProvider } from 'react-redux';
+import { store } from '@/app';
+
+// types
 import type { RenderOptions } from '@testing-library/react';
 type Props = React.PropsWithChildren;
 
 const Wrapper: React.FC<Props> = ({ children }) => (
   <HelmetProvider>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <StoreProvider
-        testDefaultState={{
-          tags: [
-            {
-              name: 'Preloaded Test Tag',
-              color: 'blue',
-              id: 'preloaded-test-tag',
-            },
-          ],
-        }}
-      >
-        {children}
-      </StoreProvider>
+      <StoreProvider store={store}>{children}</StoreProvider>
     </LocalizationProvider>
   </HelmetProvider>
 );
