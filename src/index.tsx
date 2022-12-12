@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// app
-import App from './App';
-
 // styles
 import CssBaseline from '@mui/material/CssBaseline';
 
+// app
+import { App, store } from '@/app';
+
 // store
 import { Provider as StoreProvider } from 'react-redux';
-import { store } from '@/store/store';
 
 // mui/date
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
