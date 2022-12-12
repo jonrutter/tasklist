@@ -9,26 +9,34 @@ import { Delete } from '@mui/icons-material';
 
 // components
 import { Layout } from '@/components/layout/Layout';
-import { CompletedTaskList } from '@/features/tasks';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 
+// tasks
+import {
+  deleteCompletedTasks,
+  selectCompleted,
+  CompletedTaskList,
+} from '@/features/tasks';
+
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector, useDispatch } from '@/app';
 
 // custom hooks
 import { usePopup } from '@/hooks/usePopup';
 
 export const CompletedPage: React.FC = () => {
-  const { dispatch, deleted } = useStore();
+  const dispatch = useDispatch();
+  const completedList = useSelector(selectCompleted);
+
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
 
   const deleteAll = () => {
-    dispatch({ type: 'EMPTY_TRASH' });
+    dispatch(deleteCompletedTasks());
     closeWarning();
   };
 
   const checkBeforeWarning = () => {
-    if (!deleted.length) return;
+    if (!completedList.length) return;
     else openWarning();
   };
 
@@ -38,7 +46,7 @@ export const CompletedPage: React.FC = () => {
         <title>Completed | TaskList</title>
       </Helmet>
 
-      <CompletedTaskList list={deleted} label="Completed" />
+      <CompletedTaskList list={completedList} label="Completed" />
       <Button
         onClick={checkBeforeWarning}
         color="error"

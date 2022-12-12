@@ -12,19 +12,26 @@ import { Helmet } from 'react-helmet-async';
 
 // components
 import { Layout } from '@/components/layout/Layout';
-import { TaskList, TaskCreateDropdown } from '@/features/tasks';
+
+// tasks
+import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
+
+// tags
+import { selectTags } from '@/features/tags';
 
 // store
-import { useStore } from '../store/useStore';
+import { useSelector } from '@/app';
 
 // types
-import { TaskType, TagType } from '../types';
+import type { TaskType } from '@/features/tasks';
+import type { TagType } from '@/features/tags';
 
 const hasTag = (tag?: TagType) => (listItem: TaskType) =>
   get(listItem, 'tag.name', null) === get(tag, 'name');
 
 export const TagPage: React.FC = () => {
-  const { list, tags } = useStore();
+  const list = useSelector(selectList);
+  const tags = useSelector(selectTags);
   const { tag: paramTagName } = useParams();
 
   const tag = tags.find((tag) => tag.name === paramTagName);

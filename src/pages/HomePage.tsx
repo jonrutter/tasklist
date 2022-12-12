@@ -5,13 +5,15 @@ import { Helmet } from 'react-helmet-async';
 
 // components
 import { Layout } from '@/components/layout/Layout';
-import { TaskList, TaskCreateDropdown } from '@/features/tasks';
+
+// tasks
+import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // store
-import { useStore } from '../store/useStore';
+import { useSelector } from '@/app';
 
 export const HomePage: React.FC = () => {
-  const { list } = useStore();
+  const list = useSelector(selectList);
 
   return (
     <Layout>
