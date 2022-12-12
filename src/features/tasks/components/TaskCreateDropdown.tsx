@@ -12,7 +12,8 @@ import { usePopup } from '@/hooks/usePopup';
 import AddIcon from '@mui/icons-material/Add';
 
 // types
-import { PriorityType, TagType } from '@/types';
+import type { PriorityType } from '../store/tasksSlice';
+import type { TagType } from '@/features/tags';
 
 type DefaultItem = {
   name?: string;
