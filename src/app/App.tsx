@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { Header } from '@/components/layout/Header';
 import { Nav } from '@/components/layout/Nav';
-import { SaveToStorage } from '@/components/logic/SaveToStorage';
 import { PageChange } from '@/components/logic/PageChange';
 
 // pages
@@ -24,7 +23,6 @@ import {
 export const App = () => (
   <Router>
     <Box sx={{ display: 'flex' }}>
-      <SaveToStorage />
       <PageChange />
       <Header />
       <Nav />
@@ -42,5 +40,3 @@ export const App = () => (
     </Box>
   </Router>
 );
-
-export default App;
