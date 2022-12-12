@@ -5,7 +5,7 @@ import { List, Typography, Box } from '@mui/material';
 import { CompletedTask } from './CompletedTask';
 
 // types
-import type { TaskType } from '@/types';
+import type { TaskType } from '../store/tasksSlice';
 
 type Props = {
   list: TaskType[];

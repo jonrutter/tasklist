@@ -7,7 +7,8 @@ import { PriorityIcon } from '@/components/ui/PriorityIcon';
 import { Tag } from '@/features/tags';
 
 // types
-import { PriorityType, TagType } from '@/types';
+import type { PriorityType } from '../store/tasksSlice';
+import type { TagType } from '@/features/tags';
 
 /* Child Components */
 

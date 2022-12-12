@@ -7,7 +7,8 @@ import { TagField } from '@/components/ui/TagField';
 import { DateField } from '@/components/ui/DateField';
 
 // types
-import type { TaskIncompleteType, TagType, PriorityType } from '@/types';
+import type { TaskIncompleteType, PriorityType } from '../store/tasksSlice';
+import type { TagType } from '@/features/tags';
 
 type FormDataType = {
   name?: string;
