@@ -17,7 +17,7 @@ import {
 } from '../utils/time';
 
 // types
-import { TaskType } from '../types';
+import type { TaskType } from '@/features/tasks';
 
 const none = () => false;
 const all = () => true;

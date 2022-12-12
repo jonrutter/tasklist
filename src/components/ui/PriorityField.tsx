@@ -18,7 +18,7 @@ import { ListHeader } from './ListHeader';
 
 // hooks
 import { usePopover } from '@/hooks/usePopover';
-import { PriorityType } from '@/types';
+import type { PriorityType } from '@/features/tasks';
 
 // types
 type Props = {

@@ -5,7 +5,7 @@ import { ListItem, ListItemIcon, Badge, ListItemText } from '@mui/material';
 import { NavLink } from './NavLink';
 
 // types
-import type { TaskType } from '@/types';
+import type { TaskType } from '@/features/tasks';
 
 export type NavLinkType = {
   title: string;

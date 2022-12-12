@@ -3,7 +3,7 @@ import isTomorrow from 'date-fns/isTomorrow';
 import isBefore from 'date-fns/isBefore';
 import startOfToday from 'date-fns/startOfToday';
 
-import type { TaskType } from '../types';
+import type { TaskType } from '@/features/tasks';
 
 export const dueDate =
   (callback: (date: Date) => boolean) => (task: TaskType) =>
