@@ -10,9 +10,6 @@ import { useParams, Navigate } from 'react-router-dom';
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
-// components
-import { Layout } from '@/components/layout/Layout';
-
 // tasks
 import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
 
@@ -42,12 +39,12 @@ export const TagPage: React.FC = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>{tag.name} | TaskList</title>
       </Helmet>
       <TaskList label={`Tag: ${tag.name}`} list={filteredList} />
       <TaskCreateDropdown defaultItem={{ tag: tag }} />
-    </Layout>
+    </>
   );
 };

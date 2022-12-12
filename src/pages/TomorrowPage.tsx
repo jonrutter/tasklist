@@ -6,9 +6,6 @@ import { Helmet } from 'react-helmet-async';
 // date-fns
 import add from 'date-fns/add';
 
-// components
-import { Layout } from '@/components/layout/Layout';
-
 // tasks
 import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
 
@@ -27,12 +24,12 @@ export const TomorrowPage: React.FC = () => {
   const tomorrowRef = useRef(add(new Date(), { days: 1 }).getTime());
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Tomorrow | TaskList</title>
       </Helmet>
       <TaskList label={'Tomorrow'} list={filteredList} />
       <TaskCreateDropdown defaultItem={{ due: tomorrowRef.current }} />
-    </Layout>
+    </>
   );
 };

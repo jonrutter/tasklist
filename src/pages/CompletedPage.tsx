@@ -8,7 +8,6 @@ import { Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 // components
-import { Layout } from '@/components/layout/Layout';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 
 // tasks
@@ -41,7 +40,7 @@ export const CompletedPage: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Completed | TaskList</title>
       </Helmet>
@@ -64,6 +63,6 @@ export const CompletedPage: React.FC = () => {
         cancelLabel="Cancel"
         confirmLabel="Delete"
       />
-    </Layout>
+    </>
   );
 };

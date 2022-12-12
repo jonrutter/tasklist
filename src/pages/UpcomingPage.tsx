@@ -3,9 +3,6 @@ import React from 'react';
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
-// components
-import { Layout } from '@/components/layout/Layout';
-
 // tasks
 import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
 
@@ -21,12 +18,12 @@ export const UpcomingPage: React.FC = () => {
   const filteredList = list.filter(isDueInFuture);
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>Upcoming | TaskList</title>
       </Helmet>
       <TaskList label={'Upcoming'} list={filteredList} />
       <TaskCreateDropdown />
-    </Layout>
+    </>
   );
 };
