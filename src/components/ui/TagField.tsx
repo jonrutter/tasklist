@@ -22,7 +22,8 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
+import { selectTags } from '@/features/tags';
 
 // colors
 import { colors } from '@/data/colors';
@@ -31,7 +32,7 @@ import { colors } from '@/data/colors';
 import { usePopover } from '@/hooks/usePopover';
 
 // types
-import { TagType } from '@/types';
+import type { TagType } from '@/features/tags';
 
 type Props = {
   tag: TagType | undefined;
@@ -43,7 +44,7 @@ type Props = {
  */
 export const TagField: React.FC<Props> = ({ tag, setTag }) => {
   const [anchor, handleOpen, handleClose, open] = usePopover();
-  const { tags } = useStore();
+  const tags = useSelector(selectTags);
 
   const handleClick = (tag: TagType) => {
     setTag(tag);

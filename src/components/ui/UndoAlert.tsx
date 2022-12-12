@@ -4,7 +4,8 @@ import React from 'react';
 import { Snackbar, Alert, Button, Slide } from '@mui/material';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useDispatch } from '@/app';
+import { unmarkTaskCompleted } from '@/features/tasks';
 
 // types
 import type { SlideProps } from '@mui/material';
@@ -32,13 +33,10 @@ export const UndoAlert: React.FC<Props> = ({
   handleClose,
   id,
 }) => {
-  const { dispatch } = useStore();
+  const dispatch = useDispatch();
 
   const restoreTask = () => {
-    dispatch({
-      type: 'RESTORE_TASK',
-      payload: id,
-    });
+    dispatch(unmarkTaskCompleted(id));
     handleClose();
   };
 

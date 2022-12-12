@@ -5,7 +5,8 @@ import { List } from '@mui/material';
 import { NavItem } from './NavItem';
 
 // store
-import { useStore } from '../../store/useStore';
+import { useSelector } from '@/app';
+import { selectList } from '@/features/tasks';
 
 // types
 import type { NavItemType } from '../../data/nav';
@@ -18,7 +19,7 @@ type Props = {
  * Renders a list of nav items.
  */
 export const NavList: React.FC<Props> = ({ navList }) => {
-  const { list } = useStore();
+  const list = useSelector(selectList);
 
   return (
     <List sx={{ pt: 0 }}>
