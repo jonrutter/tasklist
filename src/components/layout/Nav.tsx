@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import { Box, Drawer, Divider } from '@mui/material';
-import { NavTagsList } from './NavTagsList';
+import { NavTagsList } from '@/features/tags';
 import { Spacebar } from './Spacebar';
 import { NavList } from './NavList';
 
