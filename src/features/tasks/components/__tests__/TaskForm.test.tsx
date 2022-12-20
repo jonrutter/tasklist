@@ -23,7 +23,7 @@ const ComponentWithDefaults = (
       name: 'Test Name',
       description: 'Test Description',
       priority: 1,
-      tag: { name: 'Test Tag', color: 'blue', id: 'test-tag-id' },
+      tag: 'test-tag-id',
       due: new Date(),
     }}
   />
