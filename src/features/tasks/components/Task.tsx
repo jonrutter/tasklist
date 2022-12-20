@@ -14,27 +14,22 @@ import { TaskSummary } from './TaskSummary';
 import { TaskDetails } from './TaskDetails';
 
 // store
-import { useDispatch } from '@/app';
-import { markTaskCompleted } from '../store/tasksSlice';
+import { useDispatch, useSelector } from '@/app';
+import { markTaskCompleted, selectTaskById } from '../store/tasksSlice';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 
-// types
-import type { TaskType } from '../store/tasksSlice';
-
 type Props = {
   handleDelete: (id: string) => void;
-  task: TaskType;
+  id: string;
 };
 
-export const Task: React.FC<Props> = ({ handleDelete, task }) => {
+export const Task: React.FC<Props> = ({ handleDelete, id }) => {
   const dispatch = useDispatch();
+  const task = useSelector(selectTaskById(id));
   const [checked, setChecked] = useState(false);
   const [detailsOpen, openDetails, closeDetails] = usePopup(false);
-
-  // getting task name and id
-  const { name, id } = task;
 
   const deleteTask = useCallback(
     (id: string) => {
@@ -58,7 +53,7 @@ export const Task: React.FC<Props> = ({ handleDelete, task }) => {
     setChecked((prev) => !prev);
   };
 
-  if (!name || !id) return null;
+  if (!task) return null;
 
   return (
     <>
@@ -73,8 +68,15 @@ export const Task: React.FC<Props> = ({ handleDelete, task }) => {
         <ListItemButton onClick={openDetails}>
           <ListItemText
             disableTypography
-            primary={<TaskName name={name} />}
-            secondary={<TaskSummary {...task} />}
+            primary={<TaskName name={task.name} />}
+            secondary={
+              <TaskSummary
+                description={task.description}
+                priority={task.priority}
+                due={task.due}
+                tagId={task.tag}
+              />
+            }
           />
         </ListItemButton>
       </ListItem>
