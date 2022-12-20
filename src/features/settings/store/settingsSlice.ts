@@ -3,29 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 // types
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app';
-
-export type SortByOption =
-  | 'alphabetically'
-  | 'name'
-  | 'due date'
-  | 'priority'
-  | 'date added'
-  | 'default';
+import type { SortName } from '@/utils/sort';
 
 type SettingsState = {
-  sortBy: SortByOption;
+  sortBy: SortName;
 };
 
 // initial state
 const initialState: SettingsState = {
-  sortBy: 'default',
+  sortBy: 'defaultSorting',
 };
 
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    updateSortBy: (state, action: PayloadAction<SortByOption>) => {
+    updateSortBy: (state, action: PayloadAction<SortName>) => {
       state.sortBy = action.payload;
     },
   },

@@ -7,6 +7,7 @@ import { deleteTag } from '@/features/tags';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app';
 import type { FilterType } from '@/utils/filters';
+import { sortMap } from '@/utils/sort';
 
 // types
 export type PriorityType = 1 | 2 | 3 | 4;
@@ -104,13 +105,26 @@ export const selectTasks = (state: RootState) => state.tasks;
 export const selectTaskIds = (state: RootState) => state.tasks.ids as string[];
 
 export const selectFilteredTaskIds =
-  (filter: FilterType) => (state: RootState) =>
+  (filterCallback: FilterType) => (state: RootState) =>
     state.tasks.ids.filter((id) =>
-      filter(state.tasks.entities[id])
+      filterCallback(state.tasks.entities[id])
     ) as string[];
 
 export const selectTaskById = (id: string) => (state: RootState) =>
   state.tasks.entities[id];
 
-export const selectNumberOfTasks = (filter: FilterType) => (state: RootState) =>
-  state.tasks.ids.filter((id) => filter(state.tasks.entities[id])).length;
+export const selectNumberOfTasks =
+  (filterCallback: FilterType) => (state: RootState) =>
+    state.tasks.ids.filter((id) => filterCallback(state.tasks.entities[id]))
+      .length;
+
+export const selectSortedFilteredTaskIds =
+  (filterCallback: FilterType) => (state: RootState) => {
+    const sortBy = sortMap[state.settings.sortBy];
+    const { ids, entities } = state.tasks;
+    const filteredIds = ids.filter((id) => filterCallback(entities[id]));
+    const sortedIds = filteredIds.sort((a, b) =>
+      sortBy(entities[a], entities[b])
+    );
+    return sortedIds as string[];
+  };

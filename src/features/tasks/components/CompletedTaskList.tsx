@@ -18,7 +18,7 @@ import { isTaskCompleted } from '@/utils/filters';
 // types
 import {
   deleteCompletedTasks,
-  selectFilteredTaskIds,
+  selectSortedFilteredTaskIds,
 } from '../store/tasksSlice';
 
 type Props = {
@@ -40,7 +40,7 @@ export const CompletedTaskList: React.FC<Props> = ({
     dispatch(deleteCompletedTasks());
     closeWarning();
   };
-  const completedTaskIds = useSelector(selectFilteredTaskIds(filter));
+  const completedTaskIds = useSelector(selectSortedFilteredTaskIds(filter));
 
   const checkBeforeWarning = () => {
     if (completedTaskIds.length <= 0) return;

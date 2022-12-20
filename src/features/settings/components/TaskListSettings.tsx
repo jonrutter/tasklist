@@ -27,26 +27,49 @@ import { selectSortBy, updateSortBy } from '../store/settingsSlice';
 import { usePopover } from '@/hooks/usePopover';
 
 // types
-import type { SortByOption } from '../store/settingsSlice';
+import type { SortName } from '@/utils/sort';
 
-const options: SortByOption[] = [
-  'default',
-  'alphabetically',
-  'due date',
-  'date added',
-  'priority',
-];
-
-const capitalize = (str: string) =>
-  str[0].toUpperCase() + str.slice(1).toLowerCase();
-
-type ItemProps = {
-  value: SortByOption;
-  sortBy: string;
-  onClick: (value: SortByOption) => void;
+type Option = {
+  label: string;
+  value: SortName;
 };
 
-const SettingsListItem: React.FC<ItemProps> = ({ value, sortBy, onClick }) => (
+const options: Option[] = [
+  {
+    label: 'Default',
+    value: 'defaultSorting',
+  },
+  {
+    label: 'Alphabetically',
+    value: 'alphabetically',
+  },
+  {
+    label: 'Due Date',
+    value: 'dueDate',
+  },
+  {
+    label: 'Date Added',
+    value: 'dateAdded',
+  },
+  {
+    label: 'Priority',
+    value: 'priority',
+  },
+];
+
+type ItemProps = {
+  value: SortName;
+  label: string;
+  sortBy: string;
+  onClick: (value: SortName) => void;
+};
+
+const SettingsListItem: React.FC<ItemProps> = ({
+  label,
+  value,
+  sortBy,
+  onClick,
+}) => (
   <ListItem disablePadding>
     <ListItemButton onClick={() => onClick(value)}>
       {sortBy === value && (
@@ -54,7 +77,7 @@ const SettingsListItem: React.FC<ItemProps> = ({ value, sortBy, onClick }) => (
           <CheckIcon />
         </ListItemIcon>
       )}
-      <ListItemText inset={sortBy !== value} primary={capitalize(value)} />
+      <ListItemText inset={sortBy !== value} primary={label} />
     </ListItemButton>
   </ListItem>
 );
@@ -68,7 +91,7 @@ export const TaskListSettings = () => {
   const sortBy = useSelector(selectSortBy);
   const [anchor, handleOpen, handleClose, open] = usePopover();
 
-  const handleClick = (value: SortByOption) => {
+  const handleClick = (value: SortName) => {
     dispatch(updateSortBy(value));
     handleClose();
   };
@@ -94,8 +117,9 @@ export const TaskListSettings = () => {
           <Divider />
           {options.map((option) => (
             <SettingsListItem
-              key={option}
-              value={option}
+              key={option.label}
+              label={option.label}
+              value={option.value}
               onClick={handleClick}
               sortBy={sortBy}
             />
