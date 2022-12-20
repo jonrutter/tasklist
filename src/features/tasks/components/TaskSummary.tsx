@@ -8,7 +8,6 @@ import { Tag } from '@/features/tags';
 
 // types
 import type { PriorityType } from '../store/tasksSlice';
-import type { TagType } from '@/features/tags';
 
 /* Child Components */
 
@@ -35,12 +34,11 @@ const TaskPriority: React.FC<{ priority?: PriorityType }> = ({ priority }) =>
     </Grid>
   ) : null;
 
-const TaskTag: React.FC<{ tag?: TagType }> = ({ tag }) =>
-  tag ? (
-    <Grid item>
-      <Tag tag={tag} />
-    </Grid>
-  ) : null;
+const TaskTag: React.FC<{ tagId?: string }> = ({ tagId }) => (
+  <Grid item>
+    <Tag id={tagId} />
+  </Grid>
+);
 
 /* Task Summary */
 
@@ -48,20 +46,20 @@ type Props = {
   description: string;
   due?: Date;
   priority: PriorityType;
-  tag?: TagType;
+  tagId?: string;
 };
 
 export const TaskSummary: React.FC<Props> = ({
   description,
   due,
   priority,
-  tag,
+  tagId,
 }) => (
   <>
     <TaskDescription description={description} />
     <Grid container spacing={2} alignItems="center">
       <TaskDueDate due={due} />
-      <TaskTag tag={tag} />
+      <TaskTag tagId={tagId} />
       <TaskPriority priority={priority} />
     </Grid>
   </>
