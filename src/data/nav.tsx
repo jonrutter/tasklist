@@ -10,22 +10,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 // utils
 import {
-  isDueToday,
-  isDueTomorrow,
-  isDueInFuture,
-  isPastDue,
-} from '../utils/time';
+  isTaskDueToday,
+  isTaskDueTomorrow,
+  isTaskDueInFuture,
+  isTaskPastDue,
+  isTaskCompleted,
+  isTaskNotCompleted,
+} from '@/utils/filters';
 
 // types
 import type { TaskType } from '@/features/tasks';
-
-const none = () => false;
-const all = () => true;
+import type { FilterType } from '@/utils/filters';
 
 export type NavItemType = {
   title: string;
   to: string;
-  listCallback: (_: TaskType) => boolean | null;
+  filter: FilterType;
   icon: JSX.Element;
 };
 
@@ -33,40 +33,42 @@ export const navItems: NavItemType[] = [
   {
     title: 'All Tasks',
     to: '/',
-    listCallback: all,
+    filter: isTaskNotCompleted,
     icon: <InboxIcon fontSize="small" />,
   },
   {
     title: 'Today',
     to: '/today',
-    listCallback: isDueToday,
+    filter: (task?: TaskType) =>
+      isTaskNotCompleted(task) && isTaskDueToday(task),
     icon: <TodayIcon fontSize="small" />,
   },
   {
     title: 'Tomorrow',
     to: '/tomorrow',
-    listCallback: isDueTomorrow,
+    filter: (task?: TaskType) =>
+      isTaskNotCompleted(task) && isTaskDueTomorrow(task),
     icon: <UpcomingIcon fontSize="small" />,
   },
   {
     title: 'Upcoming',
     to: '/upcoming',
-    listCallback: isDueInFuture,
+    filter: (task?: TaskType) =>
+      isTaskNotCompleted(task) && isTaskDueInFuture(task),
     icon: <EventNoteIcon fontSize="small" />,
   },
   {
     title: 'Past Due',
     to: '/due',
-    listCallback: isPastDue,
+    filter: (task?: TaskType) =>
+      isTaskNotCompleted(task) && isTaskPastDue(task),
     icon: <ScheduleIcon fontSize="small" />,
   },
 ];
 
-export const completed: NavItemType[] = [
-  {
-    title: 'Completed',
-    to: '/completed',
-    listCallback: none,
-    icon: <DeleteIcon fontSize="small" />,
-  },
-];
+export const completed: NavItemType = {
+  title: 'Completed',
+  to: '/completed',
+  filter: isTaskCompleted,
+  icon: <DeleteIcon fontSize="small" />,
+};
