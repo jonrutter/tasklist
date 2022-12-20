@@ -11,7 +11,7 @@ import { UpdateTask } from './UpdateTask';
 
 // store
 import { useSelector } from '@/app';
-import { selectList } from '../store/tasksSlice';
+import { selectTaskById } from '../store/tasksSlice';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
@@ -51,7 +51,7 @@ const DetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
         <Grid container alignItems="center" spacing={2}>
           {task.tag && (
             <Grid item>
-              <Tag tag={task.tag} />
+              <Tag id={task.tag} />
             </Grid>
           )}
           <Grid item>
@@ -82,8 +82,7 @@ type Props = {
  * Renders a modal box to display the Task's full details.
  */
 export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
-  const list = useSelector(selectList);
-  const task = list.find((task) => task.id === id) || null;
+  const task = useSelector(selectTaskById(id));
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor, tryCloseEditor] = usePopup(false);
 
