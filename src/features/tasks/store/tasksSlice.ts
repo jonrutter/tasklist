@@ -1,14 +1,14 @@
-// TODO: subscribe to tag updating/deleting actions
+import { createSlice, nanoid, createEntityAdapter } from '@reduxjs/toolkit';
 
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+// tag actions
+import { deleteTag } from '@/features/tags';
 
 // types
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '@/app';
-import type { TagType } from '@/features/tags';
+import type { FilterType } from '@/utils/filters';
 
 // types
-
 export type PriorityType = 1 | 2 | 3 | 4;
 
 export interface TaskIncompleteType {
@@ -16,7 +16,7 @@ export interface TaskIncompleteType {
   description: string;
   priority: PriorityType;
   due?: Date;
-  tag?: TagType;
+  tag?: string;
   date?: Date;
   id?: string;
   completed?: boolean;
@@ -28,9 +28,12 @@ export interface TaskType extends TaskIncompleteType {
   completed: boolean;
 }
 
-type TaskState = TaskType[];
+// entity adapter
+const tasksAdapter = createEntityAdapter<TaskType>({
+  selectId: (task: TaskType) => task.id as string, // assert ids to be type string, since all ids are generated as strings by nanoid
+});
 
-const initialState: TaskState = [];
+const initialState = tasksAdapter.getInitialState();
 
 export const tasksSlice = createSlice({
   name: 'tasks',
@@ -44,38 +47,42 @@ export const tasksSlice = createSlice({
         id: nanoid(),
         completed: false,
       };
-      state.push(newTask);
+      tasksAdapter.addOne(state, newTask);
     },
     updateTask: (
       state,
       action: PayloadAction<{ id: string; data: TaskIncompleteType }>
     ) => {
       const { id, data } = action.payload;
-      // updating the list with the given id with the new data
-      return state.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              ...data,
-            }
-          : item
-      );
+      tasksAdapter.updateOne(state, { id, changes: data });
     },
     markTaskCompleted: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      return state.map((item) =>
-        item.id === id ? { ...item, completed: true } : item
-      );
+      tasksAdapter.updateOne(state, { id, changes: { completed: true } });
     },
     unmarkTaskCompleted: (state, action: PayloadAction<string>) => {
       const id = action.payload;
-      return state.map((item) =>
-        item.id === id ? { ...item, completed: false } : item
-      );
+      tasksAdapter.updateOne(state, { id, changes: { completed: false } });
     },
     deleteCompletedTasks: (state) => {
-      return state.filter((item) => !item.completed);
+      const keysToRemove = state.ids.filter(
+        (id) => state.entities[id]?.completed
+      );
+      tasksAdapter.removeMany(state, keysToRemove);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(deleteTag, (state, action) => {
+      const deletedTagId = action.payload;
+      const affectedTaskIds = state.ids.filter(
+        (id) => state.entities[id]?.tag === deletedTagId
+      );
+      const updated = affectedTaskIds.map((id) => ({
+        id,
+        changes: { ...state.entities[id], tag: undefined },
+      }));
+      tasksAdapter.updateMany(state, updated);
+    });
   },
 });
 
@@ -92,11 +99,18 @@ export const {
 export const { reducer } = tasksSlice;
 
 // export selectors
-export const selectList = (state: RootState) =>
-  state.tasks.filter((i) => !i.completed);
+export const selectTasks = (state: RootState) => state.tasks;
 
-export const selectCompleted = (state: RootState) =>
-  state.tasks.filter((i) => i.completed);
+export const selectTaskIds = (state: RootState) => state.tasks.ids as string[];
 
-export const selectTask = (id: string) => (state: RootState) =>
-  state.tasks.find((item) => item.id === id);
+export const selectFilteredTaskIds =
+  (filter: FilterType) => (state: RootState) =>
+    state.tasks.ids.filter((id) =>
+      filter(state.tasks.entities[id])
+    ) as string[];
+
+export const selectTaskById = (id: string) => (state: RootState) =>
+  state.tasks.entities[id];
+
+export const selectNumberOfTasks = (filter: FilterType) => (state: RootState) =>
+  state.tasks.ids.filter((id) => filter(state.tasks.entities[id])).length;
