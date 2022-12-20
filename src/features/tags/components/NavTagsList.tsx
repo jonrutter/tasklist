@@ -7,7 +7,7 @@ import { NavTagItem } from './NavTagItem';
 import { CustomDialog } from '@/components/ui/CustomDialog';
 
 // tags
-import { selectTags, CreateTag } from '@/features/tags';
+import { selectTagIds, CreateTag } from '@/features/tags';
 
 // store
 import { useSelector } from '@/app';
@@ -31,7 +31,7 @@ const AddTagButton: React.FC<ButtonProps> = ({ onClick }) => (
  * A modified NavList for rendering NavTags.
  */
 export const NavTagsList = () => {
-  const tags = useSelector(selectTags);
+  const tagIds = useSelector(selectTagIds);
   const [editing, setEditing] = useState(false);
 
   const handleAddTag = () => {
@@ -47,10 +47,10 @@ export const NavTagsList = () => {
         label="Tags"
         secondaryAction={<AddTagButton onClick={handleAddTag} />}
       >
-        {tags.length ? (
+        {tagIds.length ? (
           <div>
-            {tags.map((tag) => (
-              <NavTagItem tag={tag} key={tag.id} />
+            {tagIds.map((id) => (
+              <NavTagItem id={id} key={id} />
             ))}
           </div>
         ) : (

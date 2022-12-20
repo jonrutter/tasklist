@@ -22,7 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 // tags
-import { selectTags, deleteTag, UpdateTag } from '@/features/tags';
+import { selectTagById, deleteTag, UpdateTag } from '@/features/tags';
 
 // store
 import { useSelector, useDispatch } from '@/app';
@@ -30,9 +30,6 @@ import { useSelector, useDispatch } from '@/app';
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 import { usePopover } from '@/hooks/usePopover';
-
-// types
-import type { TagType } from '@/features/tags';
 
 type Props = {
   id: string;
@@ -46,9 +43,7 @@ type Props = {
  */
 export const TagSettings: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
-  const tags = useSelector(selectTags);
-  const tag: TagType | undefined =
-    tags.find((tag) => tag.id === id) || undefined;
+  const tag = useSelector(selectTagById(id));
 
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor] = usePopup(false);
