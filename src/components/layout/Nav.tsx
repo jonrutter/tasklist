@@ -1,13 +1,13 @@
 import React from 'react';
 
 // components
-import { Box, Drawer, Divider } from '@mui/material';
+import { Box, Drawer, Divider, List } from '@mui/material';
 import { NavTagsList } from '@/features/tags';
 import { Spacebar } from './Spacebar';
-import { NavList } from './NavList';
 
 // data
 import { navItems, completed } from '@/data/nav';
+import { NavItem } from './NavItem';
 
 type DrawerProps = React.PropsWithChildren<{
   navOpen: boolean;
@@ -62,11 +62,17 @@ export const Nav: React.FC<Props> = ({ navOpen, toggleNav }) => (
   <NavDrawer navOpen={navOpen} toggleNav={toggleNav}>
     <Box>
       <Spacebar />
-      <NavList navList={navItems} />
+      <List sx={{ pt: 0 }}>
+        {navItems.map((item) => (
+          <NavItem key={item.title} {...item} />
+        ))}
+      </List>
       <Divider />
       <NavTagsList />
       <Divider />
-      <NavList navList={completed} />
+      <List sx={{ pt: 0 }}>
+        <NavItem {...completed} />
+      </List>
     </Box>
   </NavDrawer>
 );
