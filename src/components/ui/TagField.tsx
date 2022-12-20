@@ -23,7 +23,7 @@ import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 
 // store
 import { useSelector } from '@/app';
-import { selectTags } from '@/features/tags';
+import { selectTagById, selectTagIds } from '@/features/tags';
 
 // colors
 import { colors } from '@/data/colors';
@@ -31,28 +31,53 @@ import { colors } from '@/data/colors';
 // hooks
 import { usePopover } from '@/hooks/usePopover';
 
-// types
-import type { TagType } from '@/features/tags';
-
-type Props = {
-  tag: TagType | undefined;
-  setTag: React.Dispatch<React.SetStateAction<TagType | undefined>>;
+// child components
+type TagItemProps = {
+  id: string;
+  onClick: (_: string) => void;
 };
 
-/**
- * A form control to handle adding a tag to a task.
- */
-export const TagField: React.FC<Props> = ({ tag, setTag }) => {
-  const [anchor, handleOpen, handleClose, open] = usePopover();
-  const tags = useSelector(selectTags);
+/** Displays a single tag list item */
+const TagListItem: React.FC<TagItemProps> = ({ id, onClick }) => {
+  const tag = useSelector(selectTagById(id));
+  if (!tag) return null;
+  return (
+    <ListItem key={tag.id} sx={{ p: 0 }}>
+      <ListItemButton onClick={() => onClick(tag.id)}>
+        <ListItemIcon>
+          <LocalOfferIcon
+            sx={{
+              color: tag.color
+                ? colors[tag.color as keyof typeof colors]
+                : 'grey',
+            }}
+          />
+        </ListItemIcon>
+        <ListItemText>{tag.name}</ListItemText>
+      </ListItemButton>
+    </ListItem>
+  );
+};
 
-  const handleClick = (tag: TagType) => {
-    setTag(tag);
+type Props = {
+  value: string | undefined;
+  onChange: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
+
+/** A input to handle adding a tag to a task */
+export const TagField: React.FC<Props> = ({ value, onChange }) => {
+  const [anchor, handleOpen, handleClose, open] = usePopover();
+  const tagIds = useSelector(selectTagIds);
+
+  const activeTag = useSelector(selectTagById(value));
+
+  const handleClick = (tag: string) => {
+    onChange(tag);
     handleClose();
   };
 
   const clearTag = () => {
-    setTag(undefined);
+    onChange(undefined);
     handleClose();
   };
 
@@ -60,7 +85,7 @@ export const TagField: React.FC<Props> = ({ tag, setTag }) => {
 
   return (
     <Box>
-      {tag ? (
+      {activeTag ? (
         <Tooltip title="Update Tag">
           <Button
             aria-label="Update Tag"
@@ -74,14 +99,14 @@ export const TagField: React.FC<Props> = ({ tag, setTag }) => {
             startIcon={
               <LocalOfferIcon
                 sx={{
-                  color: tag.color
-                    ? colors[tag.color as keyof typeof colors]
+                  color: activeTag.color
+                    ? colors[activeTag.color as keyof typeof colors]
                     : 'grey',
                 }}
               />
             }
           >
-            {tag.name}
+            {activeTag.name}
           </Button>
         </Tooltip>
       ) : (
@@ -102,21 +127,8 @@ export const TagField: React.FC<Props> = ({ tag, setTag }) => {
         <List>
           <ListHeader>Tag</ListHeader>
           <Divider />
-          {tags.map((tag) => (
-            <ListItem key={tag.id} sx={{ p: 0 }}>
-              <ListItemButton onClick={() => handleClick(tag)}>
-                <ListItemIcon>
-                  <LocalOfferIcon
-                    sx={{
-                      color: tag.color
-                        ? colors[tag.color as keyof typeof colors]
-                        : 'grey',
-                    }}
-                  />
-                </ListItemIcon>
-                <ListItemText>{tag.name}</ListItemText>
-              </ListItemButton>
-            </ListItem>
+          {tagIds.map((id) => (
+            <TagListItem key={id} id={id} onClick={handleClick} />
           ))}
           <Divider />
           <ListItem key={id} sx={{ p: 0 }}>

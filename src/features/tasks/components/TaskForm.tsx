@@ -8,7 +8,6 @@ import { DateField } from '@/components/ui/DateField';
 
 // types
 import type { TaskIncompleteType, PriorityType } from '../store/tasksSlice';
-import type { TagType } from '@/features/tags';
 
 type FormDataType = {
   name?: string;
@@ -20,7 +19,7 @@ type DefaultValues = {
   description?: string;
   priority?: PriorityType;
   due?: Date;
-  tag?: TagType;
+  tag?: string;
   date?: Date;
   id?: string;
 };
@@ -45,7 +44,7 @@ export const TaskForm: React.FC<Props> = ({
   const [description, setDescription] = useState<string | undefined>(
     defaultValues?.description || undefined
   );
-  const [tag, setTag] = useState<TagType | undefined>(
+  const [tag, setTag] = useState<string | undefined>(
     defaultValues?.tag || undefined
   );
   const [priority, setPriority] = useState<PriorityType>(
@@ -112,7 +111,7 @@ export const TaskForm: React.FC<Props> = ({
           <Grid item>
             <Grid container alignItems="center" spacing={2}>
               <Grid item>
-                <TagField tag={tag} setTag={setTag} />
+                <TagField value={tag} onChange={setTag} />
               </Grid>
               <Grid item>
                 <PriorityField priority={priority} setPriority={setPriority} />
