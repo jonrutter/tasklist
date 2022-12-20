@@ -1,30 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
 // tasks
-import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
-
-// store
-import { useSelector } from '@/app';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // utils
-import { isDueToday } from '../utils/time';
+import { isTaskDueToday } from '@/utils/filters';
 
 export const TodayPage: React.FC = () => {
-  const list = useSelector(selectList);
-
-  const filteredList = list.filter(isDueToday);
-
   // persist the data with useRef, to avoid unsyncing the data between Today and TaskCreateForm on subsequent rerenders (and unnecessarily triggering a warning popup when closing the form)
   const todayRef = useRef(new Date().getTime());
+
+  const filter = useCallback(isTaskDueToday, []);
   return (
     <>
       <Helmet>
         <title>Today | TaskList</title>
       </Helmet>
-      <TaskList label={'Today'} list={filteredList} />
+      <TaskList label={'Today'} filter={filter} />
       <TaskCreateDropdown defaultItem={{ due: todayRef.current }} />
     </>
   );

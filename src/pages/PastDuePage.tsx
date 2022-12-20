@@ -1,27 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
 // tasks
-import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
-
-// store
-import { useSelector } from '@/app';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // utils
-import { isPastDue } from '../utils/time';
+import { isTaskPastDue } from '@/utils/filters';
 
 export const PastDuePage: React.FC = () => {
-  const list = useSelector(selectList);
+  const filter = useCallback(isTaskPastDue, []);
 
-  const filteredList = list.filter(isPastDue);
   return (
     <>
       <Helmet>
         <title>Past Due | TaskList</title>
       </Helmet>
-      <TaskList label={'Past Due'} list={filteredList} />
+      <TaskList label={'Past Due'} filter={filter} />
       <TaskCreateDropdown />
     </>
   );

@@ -1,28 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
 // tasks
-import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
-
-// store
-import { useSelector } from '@/app';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
 // utils
-import { isDueInFuture } from '../utils/time';
+import { isTaskDueInFuture } from '@/utils/filters';
 
 export const UpcomingPage: React.FC = () => {
-  const list = useSelector(selectList);
-
-  const filteredList = list.filter(isDueInFuture);
+  const filter = useCallback(isTaskDueInFuture, []);
 
   return (
     <>
       <Helmet>
         <title>Upcoming | TaskList</title>
       </Helmet>
-      <TaskList label={'Upcoming'} list={filteredList} />
+      <TaskList label={'Upcoming'} filter={filter} />
       <TaskCreateDropdown />
     </>
   );

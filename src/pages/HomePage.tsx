@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
 // tasks
-import { selectList, TaskList, TaskCreateDropdown } from '@/features/tasks';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
 
-// store
-import { useSelector } from '@/app';
+// utils
+import { isTaskNotCompleted } from '@/utils/filters';
 
 export const HomePage: React.FC = () => {
-  const list = useSelector(selectList);
+  const filter = useCallback(isTaskNotCompleted, []);
 
   return (
     <>
       <Helmet>
         <title>All Tasks | TaskList</title>
       </Helmet>
-      <TaskList label={'All Tasks'} list={list} />
+      <TaskList label={'All Tasks'} filter={filter} />
       <TaskCreateDropdown />
     </>
   );
