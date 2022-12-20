@@ -27,7 +27,7 @@ export const App = () => (
         <Route path="/upcoming" element={<UpcomingPage />} />
         <Route path="/due" element={<PastDuePage />} />
         <Route path="/completed" element={<CompletedPage />} />
-        <Route path="/tag/:tag" element={<TagPage />} />
+        <Route path="/tag/:tagId" element={<TagPage />} />
       </Routes>
     </Layout>
   </Router>
