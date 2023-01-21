@@ -16,7 +16,7 @@ const dueDate: SortCallbackType = (a?, b?) => {
   if (typeof a === 'undefined' || typeof b === 'undefined') return 0;
   if (!b.due) return -1;
   if (!a.due) return 1;
-  return a.due.getTime() - b.due.getTime();
+  return new Date(a.due).getTime() - new Date(b.due).getTime();
 };
 
 const dateAdded: SortCallbackType = () => 0;

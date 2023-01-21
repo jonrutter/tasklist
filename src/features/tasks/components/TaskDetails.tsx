@@ -44,7 +44,7 @@ const DetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
     <Grid container justifyContent="space-between" spacing={2}>
       {task.due && (
         <Grid item>
-          <DateChip date={task.due} />
+          <DateChip dateString={task.due} />
         </Grid>
       )}
       <Grid item>

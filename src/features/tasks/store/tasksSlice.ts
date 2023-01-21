@@ -16,15 +16,16 @@ export interface TaskIncompleteType {
   name: string;
   description: string;
   priority: PriorityType;
-  due?: Date;
+  due?: string;
   tag?: string;
-  date?: Date;
+  date?: string;
   id?: string;
   completed?: boolean;
 }
 
 export interface TaskType extends TaskIncompleteType {
-  date: Date;
+  date: string;
+  due?: string;
   id: string;
   completed: boolean;
 }
@@ -36,6 +37,18 @@ const tasksAdapter = createEntityAdapter<TaskType>({
 
 const initialState = tasksAdapter.getInitialState();
 
+/*
+TODO: remove with date conversion
+
+to serialize a date:
+given date: Date
+-> date.toJSON()
+
+to deserialize a date
+given dateString: ISO datestring from .toJSON():
+-> new Date(dateString);
+*/
+
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -43,7 +56,7 @@ export const tasksSlice = createSlice({
     createTask: (state, action: PayloadAction<TaskIncompleteType>) => {
       const incompleteTask = action.payload;
       const newTask = {
-        date: new Date(),
+        date: new Date().toJSON(),
         ...incompleteTask,
         id: nanoid(),
         completed: false,

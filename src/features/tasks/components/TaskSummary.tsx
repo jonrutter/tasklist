@@ -20,10 +20,10 @@ const TaskDescription: React.FC<{ description?: string }> = ({ description }) =>
     </Typography>
   ) : null;
 
-const TaskDueDate: React.FC<{ due?: Date }> = ({ due }) =>
+const TaskDueDate: React.FC<{ due?: string }> = ({ due }) =>
   due ? (
     <Grid item>
-      <DateChip date={due} />
+      <DateChip dateString={due} />
     </Grid>
   ) : null;
 
@@ -44,7 +44,7 @@ const TaskTag: React.FC<{ tagId?: string }> = ({ tagId }) => (
 
 type Props = {
   description: string;
-  due?: Date;
+  due?: string;
   priority: PriorityType;
   tagId?: string;
 };

@@ -18,9 +18,9 @@ type DefaultValues = {
   name?: string;
   description?: string;
   priority?: PriorityType;
-  due?: Date;
+  due?: string;
   tag?: string;
-  date?: Date;
+  date?: string;
   id?: string;
 };
 
@@ -50,7 +50,7 @@ export const TaskForm: React.FC<Props> = ({
   const [priority, setPriority] = useState<PriorityType>(
     defaultValues?.priority || 4
   );
-  const [due, setDue] = useState<Date | undefined>(
+  const [due, setDue] = useState<string | undefined>(
     defaultValues?.due || undefined
   );
 
@@ -106,7 +106,7 @@ export const TaskForm: React.FC<Props> = ({
           spacing={2}
         >
           <Grid item>
-            <DateField date={due} setDate={setDue} />
+            <DateField dateString={due} setDateString={setDue} />
           </Grid>
           <Grid item>
             <Grid container alignItems="center" spacing={2}>

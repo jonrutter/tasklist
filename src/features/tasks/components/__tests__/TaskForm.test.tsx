@@ -24,7 +24,7 @@ const ComponentWithDefaults = (
       description: 'Test Description',
       priority: 1,
       tag: 'test-tag-id',
-      due: new Date(),
+      due: new Date().toJSON(),
     }}
   />
 );

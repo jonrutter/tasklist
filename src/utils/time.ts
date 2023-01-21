@@ -11,13 +11,13 @@ export const isInPast = (date: Date) => isBefore(date, startOfToday());
 export const isInFuture = (date: Date) => !isInPast(date);
 
 export const isTaskPastDue = (task?: TaskType) =>
-  task?.due ? isInPast(task.due) : false;
+  task?.due ? isInPast(new Date(task.due)) : false;
 
 export const isTaskDueToday = (task?: TaskType) =>
-  task?.due ? isToday(task.due) : false;
+  task?.due ? isToday(new Date(task.due)) : false;
 
 export const isTaskDueTomorrow = (task?: TaskType) =>
-  task?.due ? isTomorrow(task.due) : false;
+  task?.due ? isTomorrow(new Date(task.due)) : false;
 
 export const isTaskDueInFuture = (task?: TaskType) =>
-  task?.due ? !isInPast(task.due) : false;
+  task?.due ? !isInPast(new Date(task.due)) : false;
