@@ -37,18 +37,6 @@ const tasksAdapter = createEntityAdapter<TaskType>({
 
 const initialState = tasksAdapter.getInitialState();
 
-/*
-TODO: remove with date conversion
-
-to serialize a date:
-given date: Date
--> date.toJSON()
-
-to deserialize a date
-given dateString: ISO datestring from .toJSON():
--> new Date(dateString);
-*/
-
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
