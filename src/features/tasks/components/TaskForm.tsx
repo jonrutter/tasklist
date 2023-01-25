@@ -7,27 +7,21 @@ import { TagField } from '@/components/ui/TagField';
 import { DateField } from '@/components/ui/DateField';
 
 // types
-import type { TaskIncompleteType, PriorityType } from '../store/tasksSlice';
+import type {
+  TaskIncompleteType,
+  PriorityType,
+  TaskType,
+} from '../store/tasksSlice';
 
 type FormDataType = {
   name?: string;
   description?: string;
 };
 
-type DefaultValues = {
-  name?: string;
-  description?: string;
-  priority?: PriorityType;
-  due?: string;
-  tag?: string;
-  date?: string;
-  id?: string;
-};
-
 type Props = {
   onSubmit: (data: TaskIncompleteType) => void;
   onClose: () => void;
-  defaultValues?: DefaultValues;
+  defaultValues?: Partial<TaskType>;
   title?: string;
 };
 
@@ -40,6 +34,7 @@ export const TaskForm: React.FC<Props> = ({
   defaultValues,
   title = 'Create Task',
 }) => {
+  console.log(defaultValues);
   const [name, setName] = useState<string>(defaultValues?.name || '');
   const [description, setDescription] = useState<string | undefined>(
     defaultValues?.description || undefined

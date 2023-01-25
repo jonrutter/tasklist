@@ -11,7 +11,7 @@ import { isTaskDueToday } from '@/utils/filters';
 
 export const TodayPage: React.FC = () => {
   // persist the data with useRef, to avoid unsyncing the data between Today and TaskCreateForm on subsequent rerenders (and unnecessarily triggering a warning popup when closing the form)
-  const todayRef = useRef(new Date().getTime());
+  const todayDateStringRef = useRef(new Date().toJSON());
 
   const filter = useCallback(isTaskDueToday, []);
   return (
@@ -20,7 +20,7 @@ export const TodayPage: React.FC = () => {
         <title>Today | TaskList</title>
       </Helmet>
       <TaskList label={'Today'} filter={filter} />
-      <TaskCreateDropdown defaultItem={{ due: todayRef.current }} />
+      <TaskCreateDropdown defaultItem={{ due: todayDateStringRef.current }} />
     </>
   );
 };

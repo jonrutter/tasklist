@@ -7,7 +7,8 @@ import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 // tasks
-import { TaskList, TaskCreateDropdown, TaskType } from '@/features/tasks';
+import { TaskList, TaskCreateDropdown } from '@/features/tasks';
+import type { TaskType } from '@/features/tasks';
 
 // tags
 import { selectTagById } from '@/features/tags';
@@ -36,7 +37,7 @@ export const TagPage: React.FC = () => {
         <title>{tag.name} | TaskList</title>
       </Helmet>
       <TaskList label={`Tag: ${tag.name}`} filter={filter} />
-      <TaskCreateDropdown defaultItem={{ tag: tag }} />
+      <TaskCreateDropdown defaultItem={{ tag: tagId }} />
     </>
   );
 };
