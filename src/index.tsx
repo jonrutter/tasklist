@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // app
-import { App, store } from '@/app';
+import { App, store, persistState } from '@/app';
 
 // store
 import { Provider as StoreProvider } from 'react-redux';
@@ -22,6 +22,13 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+
+store.subscribe(() => {
+  persistState({
+    tasks: store.getState().tasks,
+    tags: store.getState().tags,
+  });
+});
 
 ReactDOM.render(
   <React.StrictMode>
