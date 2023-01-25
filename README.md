@@ -18,6 +18,7 @@ A lightweight, intuitive, open source to-do list app.
     <li><a href="#description">Description</a></li>
     <li><a href="#live-demo">Live Demo</a></li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#todo">Built With</a></li>
     <li><a href="#author">Author</a></li>
     <li><a href="#license">License</a></li>
   </ol>
@@ -51,6 +52,12 @@ Preview a live demo: [https://tasklist-rutterjt.netlify.app/](https://tasklist-r
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Material UI](https://mui.com/)
+
+
+## Todo
+
+- Support adding multiple tags to a task
+- Support organizing tasks by project
 
 ## Author
 
