@@ -27,7 +27,6 @@ export const TaskList: React.FC<Props> = ({ label = 'To do', filter }) => {
   const filteredTaskIds = useSelector(selectSortedFilteredTaskIds(filter));
   const listEmpty = filteredTaskIds.length <= 0;
   const [deletedTask, setDeletedTask] = useState<string>('');
-  console.log(filteredTaskIds);
 
   // task delete
   const handleDeleteTask = useCallback((id: string) => {

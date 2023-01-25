@@ -34,7 +34,6 @@ export const TaskForm: React.FC<Props> = ({
   defaultValues,
   title = 'Create Task',
 }) => {
-  console.log(defaultValues);
   const [name, setName] = useState<string>(defaultValues?.name || '');
   const [description, setDescription] = useState<string | undefined>(
     defaultValues?.description || undefined

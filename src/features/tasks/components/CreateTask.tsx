@@ -30,7 +30,6 @@ export const CreateTask: React.FC<Props> = ({
     dispatch(createTask(data));
     onClose();
   };
-  console.log(defaultItem);
 
   return (
     <TaskForm

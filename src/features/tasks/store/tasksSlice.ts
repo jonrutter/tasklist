@@ -38,7 +38,6 @@ const tasksAdapter = createEntityAdapter<TaskType>({
 
 // initial state
 const persistedState = readTasks();
-console.log(persistedState);
 
 const initialState = persistedState
   ? tasksAdapter.getInitialState(persistedState)

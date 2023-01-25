@@ -23,7 +23,6 @@ export const UpdateTask: React.FC<Props> = ({ task, onClose, onDiscard }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = (data: TaskIncompleteType) => {
-    console.log(data);
     dispatch(updateTask({ id: task.id, data }));
     onClose();
   };
