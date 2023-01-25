@@ -1,4 +1,5 @@
 import { createSlice, nanoid, createEntityAdapter } from '@reduxjs/toolkit';
+import { readTasks } from './localStorage';
 
 // tag actions
 import { deleteTag } from '@/features/tags';
@@ -35,7 +36,13 @@ const tasksAdapter = createEntityAdapter<TaskType>({
   selectId: (task: TaskType) => task.id as string, // assert ids to be type string, since all ids are generated as strings by nanoid
 });
 
-const initialState = tasksAdapter.getInitialState();
+// initial state
+const persistedState = readTasks();
+console.log(persistedState);
+
+const initialState = persistedState
+  ? tasksAdapter.getInitialState(persistedState)
+  : tasksAdapter.getInitialState();
 
 export const tasksSlice = createSlice({
   name: 'tasks',

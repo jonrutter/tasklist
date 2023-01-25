@@ -1,4 +1,5 @@
 import { createSlice, nanoid, createEntityAdapter } from '@reduxjs/toolkit';
+import { readTags } from './localStorage';
 
 // types
 import type { PayloadAction } from '@reduxjs/toolkit';
@@ -19,7 +20,11 @@ const tagsAdapter = createEntityAdapter<TagType>({
   selectId: (tag: TagType) => tag.id as string, // assert ids to be type string, since all ids are generated as strings by nanoid
 });
 
-const initialState = tagsAdapter.getInitialState();
+// initial state
+const preloadedState = readTags();
+const initialState = preloadedState
+  ? tagsAdapter.getInitialState(preloadedState)
+  : tagsAdapter.getInitialState();
 
 export const tagsSlice = createSlice({
   name: 'tags',
