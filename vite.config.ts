@@ -13,6 +13,12 @@ export default defineConfig({
     setupFiles: './test/setup.js',
   },
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      {
+        find: '@test',
+        replacement: path.resolve(__dirname, 'test'),
+      },
+    ],
   },
 });

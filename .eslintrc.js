@@ -14,12 +14,13 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        paths: ['src'],
+        paths: ['src', 'test'],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
+          '@test': './test',
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },

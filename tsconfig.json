@@ -19,9 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@tasks/*": ["./src/features/tasks/*"]
+      "@test/*": ["./test/*"]
     }
   },
-  "include": [".", "src", "src/custom.d.ts"],
+  "include": [".", "./src/**/*", "./src/custom.d.ts", "./test/**/*"],
   "exclude": ["node_modules"]
 }
