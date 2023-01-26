@@ -1,28 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-// styles
-import CssBaseline from '@mui/material/CssBaseline';
-
-// app
+import ReactDOM from 'react-dom/client';
 import { App, store, persistState } from '@/app';
-
-// store
+import CssBaseline from '@mui/material/CssBaseline';
 import { Provider as StoreProvider } from 'react-redux';
-
-// mui/date
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-// react helmet
 import { HelmetProvider } from 'react-helmet-async';
-
-// fonts
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+// subscribe to state changes, to persist state to localStorage
 store.subscribe(() => {
   persistState({
     tasks: store.getState().tasks,
@@ -30,7 +19,12 @@ store.subscribe(() => {
   });
 });
 
-ReactDOM.render(
+// render app
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+
+root.render(
   <React.StrictMode>
     <HelmetProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -40,6 +34,5 @@ ReactDOM.render(
         </StoreProvider>
       </LocalizationProvider>
     </HelmetProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
