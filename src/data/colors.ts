@@ -44,6 +44,6 @@ export const colors = {
 
 export type ColorType = keyof typeof colors;
 
-export const isColor = (color: string): color is ColorType => {
-  return color in colors;
+export const isColor = (color: unknown): color is ColorType => {
+  return typeof color === 'string' && color in colors;
 };

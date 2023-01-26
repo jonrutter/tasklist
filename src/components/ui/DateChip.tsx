@@ -8,7 +8,7 @@ import { displayDate } from '@/utils/date';
 
 // types
 type Props = {
-  date: Date;
+  dateString: string;
   noLabel?: string;
 };
 
@@ -20,12 +20,14 @@ type Props = {
  * If no date is provided, it will display a custom text.
  */
 export const DateChip: React.FC<Props> = ({
-  date,
+  dateString,
   noLabel = 'Unscheduled',
 }) => {
-  const label = displayDate(date, noLabel);
-  const chipColor = displayDate(date, noLabel, 'Past Due');
-  let color = undefined as 'success' | 'primary' | 'error' | undefined;
+  const d = new Date(dateString);
+  const label = displayDate(d, noLabel);
+  const chipColor = displayDate(d, noLabel, 'Past Due');
+  let color: 'success' | 'primary' | 'error' | undefined;
+
   switch (chipColor) {
     case 'Today':
       color = 'success';

@@ -10,16 +10,19 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { colors } from '@/data/colors';
 
 // types
-import { TagType } from '@/types';
+import { selectTagById } from '../store/tagsSlice';
+import { useSelector } from '@/app';
 
 type Props = {
-  tag: TagType;
+  id?: string;
 };
 
 /**
  * Renders a tag, with a colored tag.
  */
-export const Tag: React.FC<Props> = ({ tag }) => {
+export const Tag: React.FC<Props> = ({ id }) => {
+  const tag = useSelector(selectTagById(id));
+  if (!tag) return null;
   const { color, name } = tag;
   return (
     <Grid container alignItems="center">

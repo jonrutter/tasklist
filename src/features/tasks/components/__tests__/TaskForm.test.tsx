@@ -23,8 +23,8 @@ const ComponentWithDefaults = (
       name: 'Test Name',
       description: 'Test Description',
       priority: 1,
-      tag: { name: 'Test Tag', color: 'blue', id: 'test-tag-id' },
-      due: new Date(),
+      tag: 'test-tag-id',
+      due: new Date().toJSON(),
     }}
   />
 );

@@ -12,20 +12,10 @@ import { usePopup } from '@/hooks/usePopup';
 import AddIcon from '@mui/icons-material/Add';
 
 // types
-import { PriorityType, TagType } from '@/types';
-
-type DefaultItem = {
-  name?: string;
-  description?: string;
-  priority?: PriorityType;
-  due?: Date | number;
-  tag?: TagType;
-  date?: Date | number;
-  id?: string;
-};
+import type { TaskType } from '@/features/tasks';
 
 type Props = {
-  defaultItem?: DefaultItem;
+  defaultItem?: Partial<TaskType>;
 };
 
 /**
@@ -37,9 +27,6 @@ export const TaskCreateDropdown: React.FC<Props> = ({ defaultItem }) => {
   const [formOpen, openForm, closeForm] = usePopup(false);
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
 
-  // TODO: fix
-  console.log(defaultItem);
-
   // closes the entire ui
   const close = () => {
     closeForm();
@@ -49,7 +36,11 @@ export const TaskCreateDropdown: React.FC<Props> = ({ defaultItem }) => {
   return (
     <Box sx={{ mt: 2 }}>
       {formOpen ? (
-        <CreateTask onClose={close} onDiscard={openWarning} />
+        <CreateTask
+          onClose={close}
+          onDiscard={openWarning}
+          defaultItem={defaultItem}
+        />
       ) : (
         <Button variant="text" onClick={openForm} startIcon={<AddIcon />}>
           New task

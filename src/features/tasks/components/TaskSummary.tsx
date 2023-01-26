@@ -7,7 +7,7 @@ import { PriorityIcon } from '@/components/ui/PriorityIcon';
 import { Tag } from '@/features/tags';
 
 // types
-import { PriorityType, TagType } from '@/types';
+import type { PriorityType } from '../store/tasksSlice';
 
 /* Child Components */
 
@@ -20,10 +20,10 @@ const TaskDescription: React.FC<{ description?: string }> = ({ description }) =>
     </Typography>
   ) : null;
 
-const TaskDueDate: React.FC<{ due?: Date }> = ({ due }) =>
+const TaskDueDate: React.FC<{ due?: string }> = ({ due }) =>
   due ? (
     <Grid item>
-      <DateChip date={due} />
+      <DateChip dateString={due} />
     </Grid>
   ) : null;
 
@@ -34,33 +34,32 @@ const TaskPriority: React.FC<{ priority?: PriorityType }> = ({ priority }) =>
     </Grid>
   ) : null;
 
-const TaskTag: React.FC<{ tag?: TagType }> = ({ tag }) =>
-  tag ? (
-    <Grid item>
-      <Tag tag={tag} />
-    </Grid>
-  ) : null;
+const TaskTag: React.FC<{ tagId?: string }> = ({ tagId }) => (
+  <Grid item>
+    <Tag id={tagId} />
+  </Grid>
+);
 
 /* Task Summary */
 
 type Props = {
   description: string;
-  due?: Date;
+  due?: string;
   priority: PriorityType;
-  tag?: TagType;
+  tagId?: string;
 };
 
 export const TaskSummary: React.FC<Props> = ({
   description,
   due,
   priority,
-  tag,
+  tagId,
 }) => (
   <>
     <TaskDescription description={description} />
     <Grid container spacing={2} alignItems="center">
       <TaskDueDate due={due} />
-      <TaskTag tag={tag} />
+      <TaskTag tagId={tagId} />
       <TaskPriority priority={priority} />
     </Grid>
   </>

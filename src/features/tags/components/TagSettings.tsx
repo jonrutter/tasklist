@@ -15,22 +15,21 @@ import {
 } from '@mui/material';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 import { CustomDialog } from '@/components/ui/CustomDialog';
-import { UpdateTag } from '@/features/tags';
 
 // icons
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+// tags
+import { selectTagById, deleteTag, UpdateTag } from '@/features/tags';
+
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector, useDispatch } from '@/app';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 import { usePopover } from '@/hooks/usePopover';
-
-// types
-import { TagType } from '@/types';
 
 type Props = {
   id: string;
@@ -43,9 +42,8 @@ type Props = {
  *
  */
 export const TagSettings: React.FC<Props> = ({ id }) => {
-  const { tags, dispatch } = useStore();
-  const tag: TagType | undefined =
-    tags.find((tag) => tag.id === id) || undefined;
+  const dispatch = useDispatch();
+  const tag = useSelector(selectTagById(id));
 
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor] = usePopup(false);
@@ -58,12 +56,9 @@ export const TagSettings: React.FC<Props> = ({ id }) => {
     closeSettings();
   };
 
-  const deleteTag = () => {
+  const handleDelete = () => {
     if (tag) {
-      dispatch({
-        type: 'DELETE_TAG',
-        payload: { tag },
-      });
+      dispatch(deleteTag(tag.id));
     }
   };
 
@@ -112,7 +107,7 @@ export const TagSettings: React.FC<Props> = ({ id }) => {
         open={!!warningOpen}
         title="Delete Tag?"
         body="Warning: this cannot be undone."
-        handleConfirm={deleteTag}
+        handleConfirm={handleDelete}
         handleCancel={closeWarning}
         confirmLabel="Delete"
       />

@@ -20,41 +20,64 @@ import CheckIcon from '@mui/icons-material/Check';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector, useDispatch } from '@/app';
+import { selectSortBy, updateSortBy } from '../store/settingsSlice';
 
 // hooks
 import { usePopover } from '@/hooks/usePopover';
 
 // types
-export type SortOption =
-  | 'default'
-  | 'alphabetically'
-  | 'due date'
-  | 'date added'
-  | 'priority';
+import type { SortName } from '@/utils/sort';
 
-const capitalize = (str: string) =>
-  str[0].toUpperCase() + str.slice(1).toLowerCase();
+type Option = {
+  label: string;
+  value: SortName;
+};
+
+const options: Option[] = [
+  {
+    label: 'Default',
+    value: 'defaultSorting',
+  },
+  {
+    label: 'Alphabetically',
+    value: 'alphabetically',
+  },
+  {
+    label: 'Due Date',
+    value: 'dueDate',
+  },
+  {
+    label: 'Date Added',
+    value: 'dateAdded',
+  },
+  {
+    label: 'Priority',
+    value: 'priority',
+  },
+];
 
 type ItemProps = {
-  value: SortOption;
+  value: SortName;
+  label: string;
   sortBy: string;
-  handleClick: (value: SortOption) => void;
+  onClick: (value: SortName) => void;
 };
 
 const SettingsListItem: React.FC<ItemProps> = ({
+  label,
   value,
   sortBy,
-  handleClick,
+  onClick,
 }) => (
   <ListItem disablePadding>
-    <ListItemButton onClick={() => handleClick(value)}>
+    <ListItemButton onClick={() => onClick(value)}>
       {sortBy === value && (
         <ListItemIcon>
           <CheckIcon />
         </ListItemIcon>
       )}
-      <ListItemText inset={sortBy !== value} primary={capitalize(value)} />
+      <ListItemText inset={sortBy !== value} primary={label} />
     </ListItemButton>
   </ListItem>
 );
@@ -64,17 +87,12 @@ const SettingsListItem: React.FC<ItemProps> = ({
  *
  */
 export const TaskListSettings = () => {
-  const { dispatch, sortBy } = useStore();
+  const dispatch = useDispatch();
+  const sortBy = useSelector(selectSortBy);
   const [anchor, handleOpen, handleClose, open] = usePopover();
 
-  const setSortBy = (order: SortOption) =>
-    dispatch({
-      type: 'CHANGE_SORT_ORDER',
-      payload: order,
-    });
-
-  const handleClick = (value: SortOption) => {
-    setSortBy(value);
+  const handleClick = (value: SortName) => {
+    dispatch(updateSortBy(value));
     handleClose();
   };
 
@@ -97,31 +115,15 @@ export const TaskListSettings = () => {
         <List dense>
           <ListHeader>Sort By</ListHeader>
           <Divider />
-          <SettingsListItem
-            value="default"
-            handleClick={handleClick}
-            sortBy={sortBy}
-          />
-          <SettingsListItem
-            value="alphabetically"
-            handleClick={handleClick}
-            sortBy={sortBy}
-          />
-          <SettingsListItem
-            value="due date"
-            handleClick={handleClick}
-            sortBy={sortBy}
-          />
-          <SettingsListItem
-            value="date added"
-            handleClick={handleClick}
-            sortBy={sortBy}
-          />
-          <SettingsListItem
-            value="priority"
-            handleClick={handleClick}
-            sortBy={sortBy}
-          />
+          {options.map((option) => (
+            <SettingsListItem
+              key={option.label}
+              label={option.label}
+              value={option.value}
+              onClick={handleClick}
+              sortBy={sortBy}
+            />
+          ))}
         </List>
       </Popover>
     </Box>

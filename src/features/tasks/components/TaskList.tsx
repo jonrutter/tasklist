@@ -1,41 +1,31 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 
 // components
 import { List, Typography, Box, Grid } from '@mui/material';
 import { Task } from './Task';
-import { TaskListSettings } from '@/components/TaskListSettings';
 import { UndoAlert } from '@/components/ui/UndoAlert';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
+
+// settings
+import { TaskListSettings } from '@/features/settings';
 
 // types
-import { TaskType } from '@/types';
+import { selectSortedFilteredTaskIds, TaskType } from '../store/tasksSlice';
 
 type Props = {
-  list: TaskType[];
   label: string;
-};
-
-// callback mapping
-const sortCallbacks = {
-  alphabetically: (a: TaskType, b: TaskType) => (a.name < b.name ? -1 : 1),
-  'due date': (a: TaskType, b: TaskType) => {
-    if (!b.due) return -1;
-    if (!a.due) return 1;
-    return a.due.getTime() - b.due.getTime();
-  },
-  priority: (a: TaskType, b: TaskType) => a.priority - b.priority,
-  'date added': () => 0,
-  default: () => 0,
+  filter: (task?: TaskType) => boolean;
 };
 
 /**
  * Renders the main list of tasks
  */
-export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
-  const { sortBy } = useStore();
-  const listEmpty = !list.length;
+export const TaskList: React.FC<Props> = ({ label = 'To do', filter }) => {
+  // const sortBy = useSelector(selectSortBy);
+  const filteredTaskIds = useSelector(selectSortedFilteredTaskIds(filter));
+  const listEmpty = filteredTaskIds.length <= 0;
   const [deletedTask, setDeletedTask] = useState<string>('');
 
   // task delete
@@ -46,14 +36,6 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
   const handleUndoDeleteTask = () => {
     setDeletedTask('');
   };
-
-  const sortedList = useMemo(() => {
-    if (sortBy !== 'default') {
-      return list.sort(sortCallbacks[sortBy as keyof typeof sortCallbacks]);
-    } else {
-      return [...list];
-    }
-  }, [sortBy, list]);
 
   return (
     <Box>
@@ -69,8 +51,8 @@ export const TaskList: React.FC<Props> = ({ list = [], label = 'To do' }) => {
       </Grid>
       {!listEmpty && (
         <List>
-          {sortedList.map((task) => (
-            <Task key={task.id} task={task} handleDelete={handleDeleteTask} />
+          {filteredTaskIds.map((id) => (
+            <Task key={id} id={id} handleDelete={handleDeleteTask} />
           ))}
         </List>
       )}

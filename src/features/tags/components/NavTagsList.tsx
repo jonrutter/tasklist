@@ -5,10 +5,12 @@ import { ListItem, ListItemText, IconButton, Tooltip } from '@mui/material';
 import { CollapseList } from '@/components/ui/CollapseList';
 import { NavTagItem } from './NavTagItem';
 import { CustomDialog } from '@/components/ui/CustomDialog';
-import { CreateTag } from '@/features/tags';
+
+// tags
+import { selectTagIds, CreateTag } from '@/features/tags';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
 
 // types
 import AddIcon from '@mui/icons-material/Add';
@@ -29,7 +31,7 @@ const AddTagButton: React.FC<ButtonProps> = ({ onClick }) => (
  * A modified NavList for rendering NavTags.
  */
 export const NavTagsList = () => {
-  const { tags } = useStore();
+  const tagIds = useSelector(selectTagIds);
   const [editing, setEditing] = useState(false);
 
   const handleAddTag = () => {
@@ -45,10 +47,10 @@ export const NavTagsList = () => {
         label="Tags"
         secondaryAction={<AddTagButton onClick={handleAddTag} />}
       >
-        {tags.length ? (
+        {tagIds.length ? (
           <div>
-            {tags.map((tag) => (
-              <NavTagItem tag={tag} key={tag.id} />
+            {tagIds.map((id) => (
+              <NavTagItem id={id} key={id} />
             ))}
           </div>
         ) : (

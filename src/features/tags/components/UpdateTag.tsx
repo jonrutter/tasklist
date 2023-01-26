@@ -4,10 +4,11 @@ import React from 'react';
 import { TagForm } from './TagForm';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useDispatch } from '@/app';
+import { updateTag } from '../store/tagsSlice';
 
 // types
-import { TagType, TagIncompleteType } from '@/types';
+import type { TagType, TagIncompleteType } from '../store/tagsSlice';
 
 type Props = {
   onClose: () => void;
@@ -16,13 +17,10 @@ type Props = {
 };
 
 export const UpdateTag: React.FC<Props> = ({ tag, onClose, onDiscard }) => {
-  const { dispatch } = useStore();
+  const dispatch = useDispatch();
 
   const handleSubmit = (data: TagIncompleteType) => {
-    dispatch({
-      type: 'UPDATE_TAG',
-      payload: { id: tag.id, data },
-    });
+    dispatch(updateTag({ id: tag.id, data }));
     onClose();
   };
 

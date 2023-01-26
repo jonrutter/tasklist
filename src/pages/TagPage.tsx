@@ -1,8 +1,4 @@
-import React from 'react';
-
-// lodash helpers
-import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
+import React, { useCallback } from 'react';
 
 // routing
 import { useParams, Navigate } from 'react-router-dom';
@@ -10,37 +6,38 @@ import { useParams, Navigate } from 'react-router-dom';
 // react helmet
 import { Helmet } from 'react-helmet-async';
 
-// components
-import { Layout } from '@/components/layout/Layout';
+// tasks
 import { TaskList, TaskCreateDropdown } from '@/features/tasks';
+import type { TaskType } from '@/features/tasks';
+
+// tags
+import { selectTagById } from '@/features/tags';
 
 // store
-import { useStore } from '../store/useStore';
+import { useSelector } from '@/app';
 
-// types
-import { TaskType, TagType } from '../types';
-
-const hasTag = (tag?: TagType) => (listItem: TaskType) =>
-  get(listItem, 'tag.name', null) === get(tag, 'name');
+// utils
+import { doesTaskHaveTag } from '@/utils/filters';
 
 export const TagPage: React.FC = () => {
-  const { list, tags } = useStore();
-  const { tag: paramTagName } = useParams();
+  const { tagId } = useParams();
+  const tag = useSelector(selectTagById(tagId));
+  const filter = useCallback(
+    (task?: TaskType) => doesTaskHaveTag(tagId)(task),
+    [tagId]
+  );
 
-  const tag = tags.find((tag) => tag.name === paramTagName);
-  const filteredList = list.filter(hasTag(tag));
-
-  if (!tag || isEmpty(tag)) {
+  if (!tagId || !tag) {
     return <Navigate to="/" replace={true} />;
   }
 
   return (
-    <Layout>
+    <>
       <Helmet>
         <title>{tag.name} | TaskList</title>
       </Helmet>
-      <TaskList label={`Tag: ${tag.name}`} list={filteredList} />
-      <TaskCreateDropdown defaultItem={{ tag: tag }} />
-    </Layout>
+      <TaskList label={`Tag: ${tag.name}`} filter={filter} />
+      <TaskCreateDropdown defaultItem={{ tag: tagId }} />
+    </>
   );
 };

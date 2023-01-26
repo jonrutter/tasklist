@@ -7,16 +7,17 @@ import { DateChip } from '@/components/ui/DateChip';
 import { WarningDialog } from '@/components/ui/WarningDialog';
 import { CustomDialog } from '@/components/ui/CustomDialog';
 import { Tag } from '@/features/tags';
+import { UpdateTask } from './UpdateTask';
 
 // store
-import { useStore } from '@/store/useStore';
+import { useSelector } from '@/app';
+import { selectTaskById } from '../store/tasksSlice';
 
 // hooks
 import { usePopup } from '@/hooks/usePopup';
 
 // types
-import { TaskType } from '@/types';
-import { UpdateTask } from './UpdateTask';
+import type { TaskType } from '../store/tasksSlice';
 
 /* Child Components */
 const ButtonGrid: React.FC<React.PropsWithChildren> = ({ children }) => (
@@ -43,14 +44,14 @@ const DetailsBox: React.FC<BoxProps> = ({ task, openEditor }) => (
     <Grid container justifyContent="space-between" spacing={2}>
       {task.due && (
         <Grid item>
-          <DateChip date={task.due} />
+          <DateChip dateString={task.due} />
         </Grid>
       )}
       <Grid item>
         <Grid container alignItems="center" spacing={2}>
           {task.tag && (
             <Grid item>
-              <Tag tag={task.tag} />
+              <Tag id={task.tag} />
             </Grid>
           )}
           <Grid item>
@@ -81,8 +82,7 @@ type Props = {
  * Renders a modal box to display the Task's full details.
  */
 export const TaskDetails: React.FC<Props> = ({ open = false, onClose, id }) => {
-  const { list } = useStore();
-  const task = list.find((task) => task.id === id) || null;
+  const task = useSelector(selectTaskById(id));
   const [warningOpen, openWarning, closeWarning] = usePopup(false);
   const [editorOpen, openEditor, closeEditor, tryCloseEditor] = usePopup(false);
 

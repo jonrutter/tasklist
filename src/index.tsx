@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// app
-import App from './App';
-
 // styles
 import CssBaseline from '@mui/material/CssBaseline';
 
+// app
+import { App, store, persistState } from '@/app';
+
 // store
-import { StoreProvider } from './store/context';
+import { Provider as StoreProvider } from 'react-redux';
 
 // mui/date
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -23,11 +23,18 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+store.subscribe(() => {
+  persistState({
+    tasks: store.getState().tasks,
+    tags: store.getState().tags,
+  });
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <HelmetProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StoreProvider>
+        <StoreProvider store={store}>
           <CssBaseline />
           <App />
         </StoreProvider>

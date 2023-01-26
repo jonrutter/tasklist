@@ -8,7 +8,7 @@ import FlagIcon from '@mui/icons-material/Flag';
 import { indigo, purple, red } from '@mui/material/colors';
 
 // types
-import { PriorityType } from '@/types';
+import type { PriorityType } from '@/features/tasks';
 
 const flagColors = [null, red[500], purple[500], indigo[500], indigo[500]];
 

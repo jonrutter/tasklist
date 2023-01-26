@@ -8,7 +8,7 @@ import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { ColorType } from '@/data/colors';
 
 // types
-import { TagIncompleteType } from '@/types';
+import type { TagIncompleteType } from '../store/tagsSlice';
 
 type DefaultValues = {
   name?: string;

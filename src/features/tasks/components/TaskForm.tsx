@@ -7,27 +7,21 @@ import { TagField } from '@/components/ui/TagField';
 import { DateField } from '@/components/ui/DateField';
 
 // types
-import type { TaskIncompleteType, TagType, PriorityType } from '@/types';
+import type {
+  TaskIncompleteType,
+  PriorityType,
+  TaskType,
+} from '../store/tasksSlice';
 
 type FormDataType = {
   name?: string;
   description?: string;
 };
 
-type DefaultValues = {
-  name?: string;
-  description?: string;
-  priority?: PriorityType;
-  due?: Date;
-  tag?: TagType;
-  date?: Date;
-  id?: string;
-};
-
 type Props = {
   onSubmit: (data: TaskIncompleteType) => void;
   onClose: () => void;
-  defaultValues?: DefaultValues;
+  defaultValues?: Partial<TaskType>;
   title?: string;
 };
 
@@ -44,13 +38,13 @@ export const TaskForm: React.FC<Props> = ({
   const [description, setDescription] = useState<string | undefined>(
     defaultValues?.description || undefined
   );
-  const [tag, setTag] = useState<TagType | undefined>(
+  const [tag, setTag] = useState<string | undefined>(
     defaultValues?.tag || undefined
   );
   const [priority, setPriority] = useState<PriorityType>(
     defaultValues?.priority || 4
   );
-  const [due, setDue] = useState<Date | undefined>(
+  const [due, setDue] = useState<string | undefined>(
     defaultValues?.due || undefined
   );
 
@@ -106,12 +100,12 @@ export const TaskForm: React.FC<Props> = ({
           spacing={2}
         >
           <Grid item>
-            <DateField date={due} setDate={setDue} />
+            <DateField dateString={due} setDateString={setDue} />
           </Grid>
           <Grid item>
             <Grid container alignItems="center" spacing={2}>
               <Grid item>
-                <TagField tag={tag} setTag={setTag} />
+                <TagField value={tag} onChange={setTag} />
               </Grid>
               <Grid item>
                 <PriorityField priority={priority} setPriority={setPriority} />

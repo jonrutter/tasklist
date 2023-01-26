@@ -47,18 +47,29 @@ const DateListItem: React.FC<ItemProps> = ({ title, icon, onClick }) => (
 );
 
 type Props = {
-  date: Date | undefined;
-  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+  dateString: string | undefined;
+  setDateString: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 /**
  * A form control to handle picking a date.
  */
-export const DateField: React.FC<Props> = ({ date, setDate }) => {
+export const DateField: React.FC<Props> = ({ dateString, setDateString }) => {
   const [anchor, handleOpen, handleClose, open] = usePopover();
 
+  // deserialize the datestring so MUI datepicker props will be correctly typed
+  const date = dateString ? new Date(dateString) : new Date();
+
+  /**
+   * Handles clicking a date button (e.g., 'Today', 'Tomorrow').
+   *
+   * Updates state with the given date value (if available), and closes the dialog.
+   */
   const handleClick = (newDate: Date | undefined) => {
-    setDate(newDate);
+    if (newDate) {
+      // serialize the date and update state
+      setDateString(newDate.toJSON());
+    }
     handleClose();
   };
 
@@ -82,16 +93,16 @@ export const DateField: React.FC<Props> = ({ date, setDate }) => {
           <DatePicker
             label="Due Date"
             value={date}
-            onChange={(newValue) => {
-              if (newValue) {
-                setDate(new Date(newValue));
+            onChange={(newDate) => {
+              if (newDate) {
+                setDateString(newDate.toJSON());
               }
             }}
             onAccept={handleClose}
             renderInput={(params) => (
               <TextField size="small" sx={{ m: 2 }} {...params} />
             )}
-            minDate={Date.now()}
+            minDate={new Date()}
           />
           <List>
             <Divider />

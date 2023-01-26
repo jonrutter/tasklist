@@ -1,23 +1,20 @@
 import React from 'react';
 
 // components
-import { Box, Drawer, Divider } from '@mui/material';
-import { NavTagsList } from './NavTagsList';
+import { Box, Drawer, Divider, List } from '@mui/material';
+import { NavTagsList } from '@/features/tags';
 import { Spacebar } from './Spacebar';
-import { NavList } from './NavList';
 
 // data
 import { navItems, completed } from '@/data/nav';
+import { NavItem } from './NavItem';
 
-// store
-import { useStore } from '@/store/useStore';
+type DrawerProps = React.PropsWithChildren<{
+  navOpen: boolean;
+  toggleNav: () => void;
+}>;
 
-type DrawerProps = React.PropsWithChildren;
-
-const NavDrawer: React.FC<DrawerProps> = ({ children }) => {
-  const { dispatch, navOpen } = useStore();
-  const toggleNav = () => dispatch({ type: 'TOGGLE_NAV' });
-
+const NavDrawer: React.FC<DrawerProps> = ({ navOpen, toggleNav, children }) => {
   const drawerWidth = 240;
   const container = window.document.body;
   return (
@@ -53,18 +50,29 @@ const NavDrawer: React.FC<DrawerProps> = ({ children }) => {
   );
 };
 
+type Props = {
+  navOpen: boolean;
+  toggleNav: () => void;
+};
+
 /**
  * Renders the site navigation.
  */
-export const Nav: React.FC = () => (
-  <NavDrawer>
+export const Nav: React.FC<Props> = ({ navOpen, toggleNav }) => (
+  <NavDrawer navOpen={navOpen} toggleNav={toggleNav}>
     <Box>
       <Spacebar />
-      <NavList navList={navItems} />
+      <List sx={{ pt: 0 }}>
+        {navItems.map((item) => (
+          <NavItem key={item.title} {...item} />
+        ))}
+      </List>
       <Divider />
       <NavTagsList />
       <Divider />
-      <NavList navList={completed} />
+      <List sx={{ pt: 0 }}>
+        <NavItem {...completed} />
+      </List>
     </Box>
   </NavDrawer>
 );
