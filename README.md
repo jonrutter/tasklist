@@ -56,6 +56,7 @@ Preview a live demo: [https://tasklist-rutterjt.netlify.app/](https://tasklist-r
 
 ## Todo
 
+- Add tests
 - Support adding multiple tags to a task
 - Support organizing tasks by project
 
