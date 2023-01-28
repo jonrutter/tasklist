@@ -6,7 +6,8 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
-    'eslint-config-prettier',
+    'plugin:testing-library/react',
+    'plugin:testing-library/dom',
   ],
   settings: {
     react: {
