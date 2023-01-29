@@ -1,34 +1,59 @@
-/**
- * This module provides a custom wrapper for react-testing-library's `render()` method, and re-exports everything else from RTL.
- *
- * All RTL methods (including render) should be imported from '@test/utils'
- */
-
 import React from 'react';
 import { render } from '@testing-library/react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider as StoreProvider } from 'react-redux';
-import { store } from '@/app';
+import type { RootState, AppStore } from '@/app';
 import type { RenderOptions } from '@testing-library/react';
+import { configureStore } from '@reduxjs/toolkit';
+import type { PreloadedState } from '@reduxjs/toolkit';
+import { reducer as tasksReducer } from '@/features/tasks';
+import { reducer as tagsReducer } from '@/features/tags';
+import { reducer as settingsReducer } from '@/features/settings';
 
-/** Wraps all tested components with helmet, localization, and store context providers. */
-const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <HelmetProvider>
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <StoreProvider store={store}>{children}</StoreProvider>
-    </LocalizationProvider>
-  </HelmetProvider>
-);
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: PreloadedState<RootState>;
+  store?: AppStore;
+}
 
-// overwrite react-testing-library's `render()` method with a custom method that wraps tested components with context providers
-const customRender = (
+const basePreloadedState: PreloadedState<RootState> = {
+  tasks: {
+    entities: {},
+    ids: [],
+  },
+  tags: {
+    entities: {},
+    ids: [],
+  },
+  settings: {
+    sortBy: 'defaultSorting',
+  },
+};
+
+export function renderWithProviders(
   ui: React.ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
-) => render(ui, { wrapper: Wrapper, ...options });
+  {
+    preloadedState = basePreloadedState,
+    store = configureStore({
+      reducer: {
+        tasks: tasksReducer,
+        tags: tagsReducer,
+        settings: settingsReducer,
+      },
+      preloadedState,
+    }),
+    ...renderOptions
+  }: ExtendedRenderOptions = {}
+) {
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <HelmetProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <StoreProvider store={store}>{children}</StoreProvider>
+      </LocalizationProvider>
+    </HelmetProvider>
+  );
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+}
 
-// eslint-disable-next-line
 export * from '@testing-library/react';
-// eslint-disable-next-line
-export { customRender as render };
