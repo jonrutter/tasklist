@@ -66,9 +66,9 @@ export const TaskForm: React.FC<Props> = ({
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={handleSubmit} aria-labelledby="form-label">
       <Paper sx={{ p: 2 }}>
-        <Typography component="h3" variant="h6" sx={{ mb: 2 }}>
+        <Typography component="h3" variant="h6" sx={{ mb: 2 }} id="form-label">
           {title}
         </Typography>
         <TextField
