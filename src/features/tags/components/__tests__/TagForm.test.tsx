@@ -1,24 +1,22 @@
 import React from 'react';
-
-import '@testing-library/jest-dom';
-import { render, screen, cleanup, waitFor } from '@/utils/test-utils';
+import { renderWithProviders as render, screen, waitFor } from '@test/utils';
 import userEvent from '@testing-library/user-event';
+import { vi, it, describe } from 'vitest';
 
 // component
 import { TagForm } from '../TagForm';
 
-afterEach(cleanup);
-
-const mockHandler = () => null;
+const onSubmit = vi.fn();
+const onClose = vi.fn();
 
 const Component = (
-  <TagForm onSubmit={mockHandler} onClose={mockHandler} title="Test Title" />
+  <TagForm onSubmit={onSubmit} onClose={onClose} title="Test Title" />
 );
 
 const ComponentWithDefaults = (
   <TagForm
-    onSubmit={mockHandler}
-    onClose={mockHandler}
+    onSubmit={onSubmit}
+    onClose={onClose}
     title="Test Title"
     defaultValues={{
       name: 'Test Tag',
