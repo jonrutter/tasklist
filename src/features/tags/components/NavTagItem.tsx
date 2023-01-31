@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { NavLink } from '@/components/layout/NavLink';
+import { NavLink } from '@/components/Layout/NavLink';
 import { TagSettings } from './TagSettings';
 
 // icons
