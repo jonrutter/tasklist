@@ -41,15 +41,19 @@ export const TaskList: React.FC<Props> = ({ label = 'To do', filter }) => {
     <Box>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
-          <Typography variant="h6" component="h2">
-            {listEmpty ? 'Your list is empty' : label}
+          <Typography variant="h6" component="h1">
+            {label}
           </Typography>
         </Grid>
         <Grid item>
           <TaskListSettings />
         </Grid>
       </Grid>
-      {!listEmpty && (
+      {listEmpty ? (
+        <Typography variant="body1" sx={{ mt: 2, mb: 4 }}>
+          Your list is empty. Try adding a new task!
+        </Typography>
+      ) : (
         <List>
           {filteredTaskIds.map((id) => (
             <Task key={id} id={id} handleDelete={handleDeleteTask} />

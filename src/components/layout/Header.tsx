@@ -53,7 +53,7 @@ export const Header: React.FC<Props> = ({ navOpen, toggleNav }) => (
             }}
           />
           <Typography
-            component="h1"
+            component="span"
             noWrap
             sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem' } }}
           >
