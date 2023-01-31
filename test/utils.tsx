@@ -11,6 +11,7 @@ import type { PreloadedState } from '@reduxjs/toolkit';
 import { reducer as tasksReducer } from '@/features/tasks';
 import { reducer as tagsReducer } from '@/features/tags';
 import { reducer as settingsReducer } from '@/features/settings';
+import { BrowserRouter } from 'react-router-dom';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
@@ -49,7 +50,9 @@ export function renderWithProviders(
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <HelmetProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <StoreProvider store={store}>{children}</StoreProvider>
+        <StoreProvider store={store}>
+          <BrowserRouter>{children}</BrowserRouter>
+        </StoreProvider>
       </LocalizationProvider>
     </HelmetProvider>
   );
