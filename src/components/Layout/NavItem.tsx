@@ -1,12 +1,9 @@
 import React from 'react';
-
-// components
 import { ListItem, ListItemIcon, Badge, ListItemText } from '@mui/material';
-import { NavLink } from './NavLink';
-
-// types
-import { selectNumberOfTasks, TaskType } from '@/features/tasks';
+import { selectNumberOfTasks } from '@/features/tasks';
+import type { TaskType } from '@/features/tasks';
 import { useSelector } from '@/app';
+import { NavLink } from './NavLink';
 
 export type NavLinkType = {
   title: string;

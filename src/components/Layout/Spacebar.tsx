@@ -1,11 +1,7 @@
 import React from 'react';
-
-// components
 import { Toolbar } from '@mui/material';
 
-/**
- * Creates spacing under the main site header.
- */
+/** Creates spacing under the main site header. */
 export const Spacebar: React.FC = () => (
   <>
     <Toolbar />

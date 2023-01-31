@@ -1,6 +1,4 @@
 import React from 'react';
-
-// components
 import {
   AppBar,
   Toolbar,
@@ -9,16 +7,10 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
-import { TaskCreateDialog } from '@/features/tasks';
-
-// icons
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-
-// routing
 import { Link } from 'react-router-dom';
-
-// images
+import { TaskCreateDialog } from '@/features/tasks';
 import Logo from '@/images/logo.svg';
 
 type Props = {

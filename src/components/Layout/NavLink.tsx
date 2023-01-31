@@ -1,9 +1,5 @@
 import React from 'react';
-
-// routing
 import { Link, useLocation } from 'react-router-dom';
-
-// components
 import { ListItemButton } from '@mui/material';
 
 // types

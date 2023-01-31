@@ -1,11 +1,7 @@
 import React from 'react';
-
-// components
 import { Box, Drawer, Divider, List } from '@mui/material';
 import { NavTagsList } from '@/features/tags';
 import { Spacebar } from './Spacebar';
-
-// data
 import { navItems, completed } from '@/data/nav';
 import { NavItem } from './NavItem';
 

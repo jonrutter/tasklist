@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-// components
 import { Box } from '@mui/material';
 import { Spacebar } from './Spacebar';
 import { Header } from './Header';
