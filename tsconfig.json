@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "types": ["vite/client", "vite-plugin-svgr/client", "vitest/globals"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,9 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@tasks/*": ["./src/features/tasks/*"]
+      "@test/*": ["./test/*"]
     }
   },
-  "include": [".", "src", "src/custom.d.ts"],
+  "include": [".", "./src/**/*", "./src/custom.d.ts", "./test/**/*"],
   "exclude": ["node_modules"]
 }

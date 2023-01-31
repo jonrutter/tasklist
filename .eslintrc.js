@@ -6,7 +6,8 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
-    'eslint-config-prettier',
+    'plugin:testing-library/react',
+    'plugin:testing-library/dom',
   ],
   settings: {
     react: {
@@ -14,12 +15,13 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        paths: ['src'],
+        paths: ['src', 'test'],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
       'eslint-import-resolver-custom-alias': {
         alias: {
           '@': './src',
+          '@test': './test',
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },

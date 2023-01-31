@@ -45,10 +45,7 @@ export const PriorityField: React.FC<Props> = ({ priority, setPriority }) => {
   return (
     <Box>
       <Tooltip title="Set Priority">
-        <IconButton
-          aria-label={`Set Priority, priority is currently ${priority}`}
-          onClick={handleOpen}
-        >
+        <IconButton aria-label={`Set Priority`} onClick={handleOpen}>
           <PriorityIcon priority={priority} />
         </IconButton>
       </Tooltip>

@@ -8,7 +8,7 @@ import { isInPast } from './time';
  * Returns a formatted date string.
  */
 export const displayDate = (
-  date: Date,
+  date: Date | null,
   noDate = 'Schedule',
   pastDue = ''
 ): string => {

@@ -10,9 +10,16 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './test/setupTests.js',
+    setupFiles: './test/setup.js',
+    clearMocks: true,
   },
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      {
+        find: '@test',
+        replacement: path.resolve(__dirname, 'test'),
+      },
+    ],
   },
 });

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import '@testing-library/jest-dom';
-import { render, screen, cleanup, waitFor } from '@/utils/test-utils';
+import { renderWithProviders as render, screen, waitFor } from '@test/utils';
 import userEvent from '@testing-library/user-event';
 
 // component
 import { WarningDialog } from '@/components/ui/WarningDialog';
-
-afterEach(cleanup);
 
 const Component = () => {
   const [open, setOpen] = useState(false);
